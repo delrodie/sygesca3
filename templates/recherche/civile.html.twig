@@ -1,0 +1,65 @@
+{% extends 'base_recherche.html.twig' %}
+
+{% block title %}Recherche par matricule{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="wrapper col-md-4 offset-md-4">
+                <div class="row logo">
+                    <div class="col-12">
+                        <img src="{{ absolute_url(asset('assets/images/ascci.png')) }}" alt="logo ASCCI">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 titre">
+                        <h1>Vérification d'identité</h1>
+                    </div>
+                </div><br /><br />
+
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <div class="flash-{{ label }}">
+                                {{ message }}
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                {{ form_start(form) }}
+                    <div class="input-group">
+                        {{ form_widget(form.nom) }}
+                        <span class="text-danger">{{ form_errors(form.nom) }}</span>
+                    </div><br />
+
+                    <div class="input-group">
+                        {{ form_widget(form.prenoms) }}
+                        <span class="text-danger">{{ form_errors(form.prenoms) }}</span>
+                    </div><br />
+
+                    <div class="input-group">
+                        {{ form_widget(form.dateNaissance) }}
+                        <span class="text-danger">{{ form_errors(form.dateNaissance) }}</span>
+                    </div><br />
+
+                    <div class="input-group">
+                        {{ form_widget(form.lieuNaissance) }}
+                        <span class="text-danger">{{ form_errors(form.lieuNaissance) }}</span>
+                    </div><br />
+
+                    <button type="submit" class="btn btn-success btn-lg">Envoyer </button><br />
+
+                {{ form_end(form) }}
+                <br /> <center><div style="border:1px solid #ccc;height:0px;width:100%;margin-bottom: 5px;"></div></center>
+                <div class="footer">
+                    <div>Vérifiez par votre <a href="{{ absolute_url(path('inscription_recherche_matricule')) }}">matricule</a></div>
+                    <div class="bfoot">Nouvelle inscription ? <a href="index.html">Cliquez ici</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

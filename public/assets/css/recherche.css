@@ -1,0 +1,42 @@
+/*.container{
+  border:2px solid blue;
+  text-align:center;
+
+  //height:500px;
+  width:30%;
+}*/
+body {
+  padding: 40px;
+}
+
+h1 {
+  margin: auto;
+}
+
+/*.row{
+  height:90px;
+  width:396px;
+  background-color:paleturquoise;
+}*/
+.container .wrapper {
+  border: 1px solid #cccccc;
+  text-align: center;
+}
+.container .wrapper h1 {
+  margin: auto;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 20px;
+  color: #0c5201;
+}
+.container .footer {
+  background-color: #ccc;
+  width: 100%;
+  margin-top: 0;
+}
+.container .footer .bfoot {
+  padding: 15px 0;
+}
+
+/*# sourceMappingURL=recherche.css.map */
