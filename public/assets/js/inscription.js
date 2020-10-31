@@ -121,7 +121,7 @@ $().ready(function () {
                                 cancelButtonText: 'Non, prochainement',
                             }).then((result) => {
                                 if (result.value) {
-                                    window.location = "http://sygesca2.scoutascci.org/recherche";
+                                    window.location = "http://adhesion.scoutascci.org/recherche/carte/";
                                 } else {
                                     window.location.reload();
                                 }

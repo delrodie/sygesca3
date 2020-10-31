@@ -189,6 +189,7 @@ class CinetpayController extends AbstractController
 
                         // Mise a jour dela table Userinfo
                         $userInfo->setStatut('00');
+                        $userInfo->setStatusPaiement('VALID');
                         $em->flush();
 
                         $message=[
