@@ -23,8 +23,13 @@
             </div>
         </div>
         <div class="bouton">
-            <a href="index.html" class="btn btn-xlarge orange">Je m'inscris <br><span class="small">(pour la première fois)</span></a>
+            <a href="{{ absolute_url(path('adhesion_nouvelle_inscription')) }}" class="btn btn-xlarge orange">Je m'inscris <br><span class="small">(pour la première fois)</span></a>
             <a href="{{ absolute_url(path('inscription_recherche_matricule')) }}" class="btn btn-xlarge vert">Je me ré-inscris <br><span class="small">(J'étais inscris l'an dernier)</span></a>
+        </div>
+        <div class="row">
+            <div class="col-12 lien-impression text-center">
+                <a href="{{ path('recherche_carte') }}">Carte provisoire</a>
+            </div>
         </div>
     </div>
 {% endblock %}

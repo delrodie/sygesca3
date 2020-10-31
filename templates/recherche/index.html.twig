@@ -44,9 +44,13 @@
                 <br /> <center><div style="border:1px solid #ccc;height:0px;width:100%;margin-bottom: 5px;"></div></center>
                 <div class="footer">
                     <div></div>
-                    <div class="bfoot">Nouvelle inscription ? <a href="index.html">Cliquez ici</a></div>
+                    <div class="bfoot">Nouvelle inscription ? <a href="{{ absolute_url(path('adhesion_nouvelle_inscription') )}}">Cliquez ici</a></div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ absolute_url(asset('assets/css/recherche.css')) }}">
 {% endblock %}

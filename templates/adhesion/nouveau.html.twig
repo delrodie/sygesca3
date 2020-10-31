@@ -1,0 +1,107 @@
+{% extends 'base_adhesion.html.twig' %}
+
+{% block title %}{{parent()}} Formulaire d'adhesion{% endblock %}
+
+{% block body %}
+    <div class="wrapper">
+        <div class="inner" style="background-image: url({{ absolute_url(asset('assets/images/fond1.jpg')) }}); background-size: cover;">
+            <div class="logo"><img src="{{ absolute_url(asset('assets/images/ascci.png') )}}" alt="logo ASCCI"></div>
+
+            <form action="{{ path('adhesion_inscription') }}" method="post" id="adhesion" name="adhesion">
+                <h3>Formulaire d'adhésion</h3>
+                <div class="form-group">
+                    <div class="form-wrapper">
+                        <label for="">Nom de famille</label>
+                        <input type="text" name="adhesion_nom" class="form-control" autocomplete="off" required>
+                    </div>
+                    <div class="form-wrapper">
+                        <label for="">Prenoms</label>
+                        <input type="text" name="adhesion_prenoms" class="form-control" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-wrapper">
+                        <label for="">Date de naissance</label>
+                        <input type="date" name="adhesion_datenaissance" class="form-control" autocomplete="off" required>
+                    </div>
+                    <div class="form-wrapper">
+                        <label for="">Lieu de naissance</label>
+                        <input type="text" name="adhesion_lieunaissance" class="form-control" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-wrapper">
+                        <label for="">Sexe</label>
+                        <select name="adhesion_sexe" id="adhesion_sexe" class="form-control" required>
+                            <option value="">-</option>
+                            <option value="HOMME">HOMME</option>
+                            <option value="FEMME">FEMME</option>
+                        </select>
+                    </div>
+                    <div class="form-wrapper">
+                        <label for="">Numero de telephone personnel</label>
+                        <input type="text"name="adhesion_contact" class="form-control" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-wrapper">
+                        <label for="">En cas d'urgence</label>
+                        <select name="adhesion_urgence" id="adhesion_urgence" class="form-control" required>
+                            <option value="">-</option>
+                            <option value="PERE">PERE</option>
+                            <option value="MERE">MERE</option>
+                            <option value="AUTRE">AUTRE</option>
+                        </select>
+                    </div>
+                    <div class="form-wrapper">
+                        <label for="">Contact corespondant</label>
+                        <input type="text"name="adhesion_contact_parent" class="form-control" autocomplete="off" required>
+                    </div>
+                </div>
+                <div class="form-wrapper">
+                    <label for="">Fonction</label>
+                    <select name="adhesion_fonction" id="adhesion_fonction" class="form-control" required>
+                        <option value="">--</option>
+                        {% for fonction in fonctions %}
+                            <option value="{{ fonction.id }}">{{ fonction.libelle }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div id="divBranche" class="form-wrapper">
+                    <label for="">Branche</label>
+                    <select name="adhesion_branche" id="adhesion_branche" class="form-control">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="form-wrapper">
+                        <label for="">Région</label>
+                        <select name="adhesion_region" id="adhesion_region" class="form-control" required>
+                            <option value="">--</option>
+                            {% for region in regions %}
+                                <option value="{{ region.id }}">{{ region.nom }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-wrapper">
+                        <label for="">District</label>
+                        <select name="adhesion_district" id="adhesion_district" class="form-control" required>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-wrapper">
+                    <label for="">Groupe</label>
+                    <select name="adhesion_groupe" id="adhesion_groupe" class="form-control" required>
+                    </select>
+                </div>
+                <div class="form-wrapper">
+                    <span style="color: red">Droit d'adhésion: <strong id="montant_adhesion"></strong></span>
+                </div>
+                <button>S'inscrire</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ absolute_url(asset('assets/js/inscription.js')) }}"></script>
+{% endblock %}

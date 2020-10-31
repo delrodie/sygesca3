@@ -1,0 +1,107 @@
+{% extends 'base_recherche.html.twig' %}
+
+{% block title %}Recherche par matricule{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="wrapper col-md-8 offset-md-2">
+                <div class="row">
+                    <div class="col-12 text-center mb-3 mt-1">
+                        <a href="#" onclick="imprimer('impressionCarte')" class="btn btn-primary">Imprimer</a>
+                        <a href="{{ path('recherche_carte') }}"class="btn btn-outline-danger">Retour</a>
+                    </div>
+
+                </div>
+                <div class="card " id="impressionCarte">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8" style="border: #cccccc solid 1px">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img src="images/ascci.png" width="60" class="rounded-circle"
+                                             alt="" style="float: left">
+                                        <H4 class="h4 font-primary mt-3 text-center">CARTE SCOUTE PROVISOIRE</H4>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-md-12 mt-3">
+                                                <div class="text-left">Matricule: <span style="color: orangered; font-weight: bold;">{{ scout.matricule}}</span></div>
+                                                <div class="text-left">Nom: <span style="font-weight: bold;">{{ scout.nom|upper}}</span></div>
+                                                <div class="text-left">Prenoms: <span style="font-weight: bold;">{{ scout.prenoms|upper}}</span></div>
+                                                <div class="text-left">Né le: <span style="font-weight: bold;">{{ scout.datenaiss|date('d-m-Y')}}</span></div>
+                                                <div class="text-left">A: <span style="font-weight: bold;">{{ scout.lieunaiss|upper}}</span></div>
+                                                <div class="text-left">Sexe: <span style="font-weight: bold;">{{ scout.sexe}}</span></div>
+                                            </div>
+                                            <div class="col-md-12 text-right mb-5">
+                                                <!--<div class="text-right">Carte N°: <span style="color: darkred; font-weight: bold;">{{ scout.matricule}}</span></div>-->
+                                            </div>
+                                            <div class="col-md-12 text-left">
+                                                <div>Région: <span style="font-weight: bold;">{{ scout.groupe.district.region.nom}}</span></div>
+                                                <div>District: <span style="font-weight: bold;">{{ scout.groupe.district.nom}}</span></div>
+                                                <div>Groupe: <span style="font-weight: bold;">{{ scout.groupe.paroisse}}</span></div>
+                                                {% if scout.branche %}
+                                                    <div>Unité: <span style="font-weight: bold;">{{ scout.branche}}</span></div>
+                                                {% endif %}
+                                                {% if scout.fonction %}
+                                                    <div>Fonction: <span style="font-weight: bold;">{{ scout.fonction}}</span></div>
+                                                {% endif %}
+                                                <div>
+                                                    En cas d'urgence: <span style="font-weight: bold; color: blue">{{ scout.contactParent}}</span>
+                                                    {% if scout.urgence == "AUTRE" %}
+                                                    {% else %}
+                                                        {% if scout.urgence %}
+                                                            ({{ scout.urgence }})
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 text-center">
+                                        <div class="text-center">Carte N°: <span style="color: darkred; font-weight: bold; font-size: 1.2em">{{ scout.carte}}</span></div>
+                                        <div style="border: #cccccc solid 1px; width: 175px; height: 175px; margin-left: 20px;"></div>
+                                        <div>
+                                            <span style="font-size: 0.8em; font-style:italic;">Cachet et signature</span>
+                                        </div>
+                                        <div>
+                                            <span style="font-size: 0.95em; font-style:italic;">Commissaire National</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-12 text-center">
+                                                <span style="font-size: 0.8em; font-style:italic; line-height: 0.5em;">
+                                                     Cette carte est detenue à titre provisoire pour l'année {{ scout.cotisation }}.
+                                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ absolute_url(asset('assets/css/recherche.css')) }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function imprimer(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>
+{% endblock %}
