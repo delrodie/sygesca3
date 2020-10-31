@@ -187,6 +187,10 @@ class CinetpayController extends AbstractController
                         $this->gestionScout->carte($scout->getId(), $region->getCode());
                         $this->gestionCotisation->save($scout->getId(), $fonction->getId(), $cpm_amount);
 
+                        // Mise a jour dela table Userinfo
+                        $userInfo->setStatut('00');
+                        $em->flush();
+
                         $message=[
                             'id'=> $id_transaction,
                             'matricule' => $scout->getMatricule(),
