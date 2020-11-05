@@ -48,6 +48,9 @@ class AdhesionController extends AbstractController
      */
     public function index(Request $request): Response
     {
+
+        $em = $this->getDoctrine()->getManager();
+
         //Initialisation
         $encoders = [new XmlEncoder(), new JsonEncoder()];
         $normalizers = [new ObjectNormalizer()];
@@ -79,23 +82,48 @@ class AdhesionController extends AbstractController
             'contactParent' => $contactParent
         ]);
 
+        $region = $this->regionRepository->findOneBy(['id'=>$region]);
+        $district = $this->districtRepository->findOneBy(['id'=>$district]);
+        $groupe = $this->groupeRepository->findOneBy(['id'=>$groupe]);
+        $fonction = $this->fonctionRepository->findOneBy(['id'=>$fonction]);
+
         if ($userInfo2020){
-            $message = [
-                'msg' => "Vous êtes déjà inscrit(e)",
-                'status' => false
-            ];
+            // Verification si la transaction precedente a abouti sinon faire une mise a jour
+            if ($userInfo2020->getStatut() != '00' && $userInfo2020->getStatusPaiement()!= 'VALID'){
+                $userInfo2020->setBranche($branche);
+                $userInfo2020->setUrgence($urgence);
+                $userInfo2020->setContactParent($contactParent);
+                $userInfo2020->setRegion($region);
+                $userInfo2020->setDistrict($district);
+                $userInfo2020->setGroupe($groupe);
+                $userInfo2020->setFonction($fonction);
+                $userInfo2020->setContact($contact);
+
+                $em->flush();
+
+                $montant = $fonction->getMontant();
+
+                $am = (int)$montant/ (1 - 0.035) ;
+                $am = $this->arrondiSuperieur($am, 5);
+
+                $message = [
+                    'id'=> $userInfo2020->getIdTransaction(),
+                    'status' => true,
+                    'amount' => $am,
+                ];
+            }else{
+                $message = [
+                    'msg' => "Vous êtes déjà inscrit(e)",
+                    'status' => false
+                ];
+            }
 
             return $this->json($message);
+
         }else{
-            $region = $this->regionRepository->findOneBy(['id'=>$region]);
-            $district = $this->districtRepository->findOneBy(['id'=>$district]);
-            $groupe = $this->groupeRepository->findOneBy(['id'=>$groupe]);
-            $fonction = $this->fonctionRepository->findOneBy(['id'=>$fonction]);
 
             $id_transaction = time().'-'.uniqid();
             $status_paiement = 'UNKNOW';
-
-            $em = $this->getDoctrine()->getManager();
 
             $userInfo2020 = new UserInfo2020();
             $userInfo2020->setNom($nom);
