@@ -19,4 +19,12 @@ class AccueilController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/dashboard", name="app_dashboard")
+     */
+    public function dashboard()
+    {
+        return $this->render('accueil/dashboard.html.twig');
+    }
+
 }

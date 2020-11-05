@@ -23,7 +23,7 @@ $().ready(function () {
                     .text(value)
                 );
             })
-        } else{
+        }else{
             $('#divBranche').fadeOut()
             $('#divBranche').children('#adhesion_branche').prop('disabled','disabled')
             $('#adhesion_branche').children().remove()

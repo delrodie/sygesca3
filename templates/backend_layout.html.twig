@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <title>{% block title %}SYGESCA 3.0 :: {% endblock %}</title>
+        <link rel="shortcut icon" href="{{ asset('assets/images/ascci.png') }}">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.bootstrap4.min.css')) }}">
+            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.bootstrap4.min.css')) }}">
+            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/responsive.bootstrap4.min.css')) }}">
+            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/css/bootstrap.min.css')) }}">
+            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/animate/animate.css')) }}">
+            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/css/icons.css')) }}">
+            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/css/style.css')) }}">
+        {% endblock %}
+    </head>
+    <body class="fixed-left">
+        <div id="wrapper">
+            <div class="left side-menu">
+                <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
+                    <i class="ion-close"></i>
+                </button>
+
+                <div class="topbar-left">
+                    <div class="text-center">
+                        <a href="{{ path('app_dashboard') }}" class="logo"><img src="{{ asset('assets/images/ascci.png') }}" alt="logo"></a>
+                    </div>
+                </div>
+
+
+                <div class="sidebar-inner slimscrollleft" id="sidebar-main">
+
+                    <div id="sidebar-menu">
+                        <ul>
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect waves-light">
+                                    <i class="mdi mdi-view-dashboard"></i><span> Tableau de bord </span>
+                                </a>
+                                <ul class="list-unstyled">
+                                    <li><a href="{{ path('app_dashboard') }}">Statistique</a></li>
+                                    <li><a href="#">Regions</a></li>
+                                    <li><a href="#">Genre</a></li>
+                                    <li><a href="#">Cartographie</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="menu-title">Rubriques</li>
+
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect waves-light"><i class="mdi mdi-bullseye"></i> <span> Gestion</span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Scout</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect waves-light"><i class="mdi mdi-table"></i><span> Finance </span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Inscrits</a></li>
+                                    <li><a href="#">Ristournes</a></li>
+                                    <li><a href="#">Extraction</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect waves-light"><i class="mdi mdi-clipboard-outline"></i><span> Etats </span><span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Extraction</a></li>
+                                    <li><a href="#">Statistiques Régions</a></li>
+                                    <li><a href="#">Liste par region</a></li>
+                                    <li><a href="#">Liste des jeunes</a></li>
+                                </ul>
+                            </li>
+
+
+                            <li class="menu-title">Administration</li>
+
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect waves-light"><i class="mdi mdi-cards-outline"></i> <span> Administrateur </span><span class="float-right"><i class="mdi mdi-chevron-right"></i></span> </a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#">Objectifs</a></li>
+                                    <li><a href="#">Regions</a></li>
+                                    <li><a href="#">Districts</a></li>
+                                    <li><a href="#">Groupe</a></li>
+                                    <li><a href="#">Branche</a></li>
+                                    <li><a href="#">Fonction</a></li>
+                                    <li><a href="#">Statut</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect waves-light"><i class="mdi mdi-account"></i><span> Paramètre </span> </a>
+                                <ul class="list-unstyled">
+                                    <li><a href="#"> Gestionnaire</a></li>
+                                    <li><a href="#"> Utilisateur</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="content-page">
+                <div class="content">
+                    <div class="topbar">
+                        <nav class="navbar-custom">
+                            <ul class="list-inline float-right mb-0">
+                                <li class="list-inline-item dropdown notification-list">
+                                    <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light nav-user" data-toggle="dropdown" href="#" role="button"
+                                       aria-haspopup="false" aria-expanded="false">
+                                        <img src="{{ asset('assets/images/avatar.png') }}" alt="user" class="rounded-circle">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                                        <!-- item-->
+                                        <div class="dropdown-item noti-title">
+                                            <h5>User</h5>
+                                        </div>
+                                        <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline"></i> Mot de passe</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item text-danger" href="#"><i class="mdi mdi-power text-danger"></i> Déconnexion</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </nav>
+                    </div>
+
+                    <div class="page-content-wrapper">
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+                <footer class="footer">
+                    © 2018-2020 <a href="https://www.scoutascci.org"><span style="font-weight: bold;">A</span>ssociation des <span style="font-weight: bold;">S</span>couts <span style="font-weight: bold;">C</span>atholiques de <span style="font-weight: bold;">C</span>ôte d'<span style="font-weight: bold;">I</span>voire</a>
+                </footer>
+            </div>
+        </div>
+
+        {% block javascripts %}
+            <script src="{{ absolute_url(asset('assets/backoffice/js/jquery.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/js/popper.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/js/bootstrap.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/js/modernizr.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/js/detect.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/js/fastclick.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/js/jquery.slimscroll.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/js/jquery.blockUI.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/js/waves.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/js/jquery.nicescroll.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/js/jquery.scrollTo.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/jquery.dataTables.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.bootstrap4.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.buttons.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.bootstrap4.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/jszip.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/pdfmake.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/vfs_fonts.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.html5.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.print.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.colVis.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.responsive.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/responsive.bootstrap4.min.js')) }}"></script>
+            <script src="{{ absolute_url(asset('assets/backoffice/pages/datatables.init.js')) }}"></script>
+        {% endblock %}
+    </body>
+</html>
