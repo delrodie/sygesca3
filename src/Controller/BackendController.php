@@ -31,8 +31,10 @@ class BackendController extends AbstractController
      */
     public function index(): Response
     {
+        $annee = $this->gestionScout->cotisation();
         return $this->render('backend/index.html.twig', [
-            'cotisations' => $this->cotisationRepository->findBy(['annee'=>$this->gestionScout->cotisation()]),
+            'cotisations' => $this->cotisationRepository->findBy(['annee'=>$annee]),
+            'annee' => $annee
         ]);
     }
 }
