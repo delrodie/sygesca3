@@ -19,6 +19,17 @@ class CotisationRepository extends ServiceEntityRepository
         parent::__construct($registry, Cotisation::class);
     }
 
+    public function findByAnnee($annee)
+    {
+        return $this->createQueryBuilder('c')
+            ->addSelect('s')
+            ->join('c.scout', 's')
+            ->where('c.annee = :annee')
+            ->setParameter('annee', $annee)
+            ->getQuery()->getResult()
+            ;
+    }
+
     // /**
     //  * @return Cotisation[] Returns an array of Cotisation objects
     //  */

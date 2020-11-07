@@ -32,7 +32,7 @@
 
 
                             <tbody>
-                            {% for cotisation in cotisations|slice(0,50) %}
+                            {% for cotisation in cotisations %}
                                 <tr style="color: #fff">
                                     <td>{{ loop.index }}</td>
                                     <td>{{ cotisation.scout.groupe.district.region.nom }}</td>
@@ -51,4 +51,26 @@
             </div> <!-- end col -->
         </div>
     </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.bootstrap4.min.css')) }}">
+    <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.bootstrap4.min.css')) }}">
+    <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/responsive.bootstrap4.min.css')) }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/jquery.dataTables.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.bootstrap4.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.buttons.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.bootstrap4.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/jszip.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/pdfmake.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/vfs_fonts.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.html5.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.print.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.colVis.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.responsive.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/responsive.bootstrap4.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/pages/datatables.init.js')) }}"></script>
 {% endblock %}

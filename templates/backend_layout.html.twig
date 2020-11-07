@@ -3,18 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        {% block refresh %}{% endblock %}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
         <title>{% block title %}SYGESCA 3.0 :: {% endblock %}</title>
         <link rel="shortcut icon" href="{{ asset('assets/images/ascci.png') }}">
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.bootstrap4.min.css')) }}">
-            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.bootstrap4.min.css')) }}">
-            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/responsive.bootstrap4.min.css')) }}">
-            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/css/bootstrap.min.css')) }}">
-            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/animate/animate.css')) }}">
-            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/css/icons.css')) }}">
-            <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/css/style.css')) }}">
         {% endblock %}
+        <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/css/bootstrap.min.css')) }}">
+        <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/animate/animate.css')) }}">
+        <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/css/icons.css')) }}">
+        <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/css/style.css')) }}">
     </head>
     <body class="fixed-left">
         <div id="wrapper">
@@ -25,7 +23,7 @@
 
                 <div class="topbar-left">
                     <div class="text-center">
-                        <a href="{{ path('app_dashboard') }}" class="logo"><img src="{{ asset('assets/images/ascci.png') }}" alt="logo"></a>
+                        <a href="{{ path('backend_dashbord') }}" class="logo"><img src="{{ asset('assets/images/ascci.png') }}" alt="logo"></a>
                     </div>
                 </div>
 
@@ -39,7 +37,8 @@
                                     <i class="mdi mdi-view-dashboard"></i><span> Tableau de bord </span>
                                 </a>
                                 <ul class="list-unstyled">
-                                    <li><a href="{{ path('app_dashboard') }}">Statistique</a></li>
+                                    <li><a href="{{ path('backend_dashbord') }}">Statistique</a></li>
+                                    <li><a href="{{ path('backend_courbe') }}">Télémetrie</a></li>
                                     <li><a href="#">Regions</a></li>
                                     <li><a href="#">Genre</a></li>
                                     <li><a href="#">Cartographie</a></li>
@@ -51,7 +50,7 @@
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect waves-light"><i class="mdi mdi-bullseye"></i> <span> Gestion</span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="#">Scout</a></li>
+                                    <li><a href="{{ path('backend_dashbord') }}">Scout</a></li>
                                 </ul>
                             </li>
 
@@ -151,19 +150,7 @@
             <script src="{{ absolute_url(asset('assets/backoffice/js/waves.js')) }}"></script>
             <script src="{{ absolute_url(asset('assets/backoffice/js/jquery.nicescroll.js')) }}"></script>
             <script src="{{ absolute_url(asset('assets/backoffice/js/jquery.scrollTo.min.js')) }}"></script>
-            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/jquery.dataTables.min.js')) }}"></script>
-            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.bootstrap4.min.js')) }}"></script>
-            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.buttons.min.js')) }}"></script>
-            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.bootstrap4.min.js')) }}"></script>
-            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/jszip.min.js')) }}"></script>
-            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/pdfmake.min.js')) }}"></script>
-            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/vfs_fonts.js')) }}"></script>
-            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.html5.min.js')) }}"></script>
-            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.print.min.js')) }}"></script>
-            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.colVis.min.js')) }}"></script>
-            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.responsive.min.js')) }}"></script>
-            <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/responsive.bootstrap4.min.js')) }}"></script>
-            <script src="{{ absolute_url(asset('assets/backoffice/pages/datatables.init.js')) }}"></script>
+            <script src="{{ asset('assets/backoffice/js/app.js') }}"></script>
         {% endblock %}
     </body>
 </html>

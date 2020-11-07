@@ -19,6 +19,27 @@ class ScoutRepository extends ServiceEntityRepository
         parent::__construct($registry, Scout::class);
     }
 
+    /**
+     * @param $region
+     * @param $annee
+     * @return int|mixed|string
+     */
+    public function findByRegion($region, $annee)
+    {
+        return $this->createQueryBuilder('s')
+            ->leftJoin('s.groupe','g')
+            ->leftJoin('g.district','d')
+            ->leftJoin('d.region','r')
+            ->where('r.id = :id')
+            ->andWhere('s.cotisation = :anne')
+            ->setParameters([
+                'id'=>$region,
+                'anne'=> $annee
+            ])
+            ->getQuery()->getResult()
+            ;
+    }
+
     // /**
     //  * @return Scout[] Returns an array of Scout objects
     //  */

@@ -1,0 +1,70 @@
+{% extends 'backend_layout.html.twig' %}
+{% block refresh %}
+    <meta http-equiv="refresh" content="600">
+{% endblock %}
+{% block title %}{{parent()}} Tableau de bord{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">Liste des adherants {{ annee }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="text-muted  font-14 d-inline-block text-truncate w-100">
+                            <span class="text-danger"><i class="fa fa-exclamation-triangle fa-lg"></i></span> Attention cette page s'actualise toutes les 10 minutes.
+
+                        </p>
+                        <marquee behavior="" direction="" onmouse>
+                            {% for liste in listes %}
+                                {{ liste.region }}: <span class="text-warning text-white-50"><strong>{{ liste.nombre }}</strong></span> -
+                            {% endfor %}
+                        </marquee>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="chart-with-area" class="ct-chart ct-golden-section"></div>
+                        <h4 class="mt-5 text-center"><u>Graphique linéaire par diocèses des adhésions {{ annee }}</u></h4>
+                        <h5 class="mt-5 header-title">Les courbes rouge et bleue correspondent respectivement aux objectifs assignés et aux nombres des scouts par régions</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/backoffice/plugins/chartist/css/chartist.min.css') }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/backoffice/plugins/chartist/js/chartist.min.js') }}"></script>
+    <script src="{{ asset('assets/backoffice/plugins/chartist/js/chartist-plugin-tooltip.min.js') }}"></script>
+    <script>
+        $().ready(function () {
+
+            var chart=new Chartist.Line(
+                "#chart-with-area",{
+                    labels:[{% for region in regions %}'{{ region.nom }}'.slice(0,5){% if loop.last %}{% else %},{% endif %}{% endfor %}],
+                    series:[
+                        [{% for num in nombre %}{{ num.id }} {% if loop.last %}{% else %},{% endif %}{% endfor %}],
+                        [{% for objectif in objectifs %}{{ objectif.val }} {% if loop.last %}{% else %},{% endif %}{% endfor %}]
+                    ]
+                },
+                {low:0,showArea:!0,plugins:[Chartist.plugins.tooltip()]}
+                );
+
+        });
+    </script>
+{% endblock %}

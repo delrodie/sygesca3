@@ -19,6 +19,19 @@ class RegionRepository extends ServiceEntityRepository
         parent::__construct($registry, Region::class);
     }
 
+    /**
+     * Liste des diocèse
+     * @return int|mixed|string
+     */
+    public function findListDiocese()
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.id >= 4')
+            ->andWhere('r.id <= 18')
+            ->getQuery()->getResult()
+            ;
+    }
+
     // /**
     //  * @return Region[] Returns an array of Region objects
     //  */
