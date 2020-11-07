@@ -46,7 +46,7 @@ class BackendController extends AbstractController
     }
 
     /**
-     * @Route("/courbe", name="backend_courbe")
+     * @Route("/telemetrie", name="backend_courbe")
      */
     public function courbe()
     {
