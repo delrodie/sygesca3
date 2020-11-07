@@ -21,10 +21,13 @@
                             <span class="text-danger"><i class="fa fa-exclamation-triangle fa-lg"></i></span> Attention cette page s'actualise toutes les 10 minutes.
 
                         </p>
+                        {% set total = 0 %}
                         <marquee behavior="" direction="" onmouse>
                             {% for liste in listes %}
                                 {{ liste.region }}: <span class="text-warning text-white-50"><strong>{{ liste.nombre }}</strong></span> -
+                                {% set total= total + liste.nombre %}
                             {% endfor %}
+                            <span style="font-size: 1.2rem; font-weight:bold;">TOTAL: {{ total|number_format(0,'','.') }}</span>
                         </marquee>
                     </div>
                 </div>
