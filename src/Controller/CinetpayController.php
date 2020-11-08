@@ -12,6 +12,7 @@ use App\Repository\StatutRepository;
 use App\Repository\UserInfo2020Repository;
 use App\Utilities\GestionCotisation;
 use App\Utilities\GestionScout;
+use Cassandra\Date;
 use CinetPay\CinetPay;
 use Cocur\Slugify\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -73,6 +74,7 @@ class CinetpayController extends AbstractController
         $serializer = new Serializer($normalizers, $encoders);
 
         $em = $this->getDoctrine()->getManager();
+        $date_maj = Date('Y-m-d h:i:s');
 
         $cpmTransId = $request->get('cpm_trans_id');
         if (isset($cpmTransId)) {
@@ -150,6 +152,7 @@ class CinetpayController extends AbstractController
                             $scout->setGroupe($groupe);
                             $scout->setStatut($scout_statut);
                             $scout->setBranche($branche);
+                            $scout->setModifieLe($date_maj);
 
                             //
                             $scout->setCotisation($this->gestionScout->cotisation());
@@ -178,6 +181,8 @@ class CinetpayController extends AbstractController
                             $scout->setCotisation($this->gestionScout->cotisation());
                             $scout->setMatricule($matricule);
                             $scout->setSlug($slug);
+                            $scout->setModifieLe($date_maj);
+                            $scout->setPublieLe($date_maj);
                         }
 
                         $em->persist($scout);
