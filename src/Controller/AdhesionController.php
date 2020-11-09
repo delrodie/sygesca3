@@ -87,6 +87,9 @@ class AdhesionController extends AbstractController
         $groupe = $this->groupeRepository->findOneBy(['id'=>$groupe]);
         $fonction = $this->fonctionRepository->findOneBy(['id'=>$fonction]);
 
+        $id_transaction = time().'-'.uniqid();
+        $status_paiement = 'UNKNOW';
+
         if ($userInfo2020){
             // Verification si la transaction precedente a abouti sinon faire une mise a jour
             if ($userInfo2020->getStatut() != '00' && $userInfo2020->getStatusPaiement()!= 'VALID'){
@@ -98,6 +101,7 @@ class AdhesionController extends AbstractController
                 $userInfo2020->setGroupe($groupe);
                 $userInfo2020->setFonction($fonction);
                 $userInfo2020->setContact($contact);
+                $userInfo2020->setIdTransaction($id_transaction);
 
                 $em->flush();
 
@@ -122,8 +126,6 @@ class AdhesionController extends AbstractController
 
         }else{
 
-            $id_transaction = time().'-'.uniqid();
-            $status_paiement = 'UNKNOW';
 
             $userInfo2020 = new UserInfo2020();
             $userInfo2020->setNom($nom);
