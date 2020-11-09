@@ -74,7 +74,7 @@ class CinetpayController extends AbstractController
         $serializer = new Serializer($normalizers, $encoders);
 
         $em = $this->getDoctrine()->getManager();
-        $date_maj = Date('Y-m-d h:i:s');
+        $date_maj = Date('Y-m-d h:i:s'); //dd($date_maj);
 
         $cpmTransId = $request->get('cpm_trans_id');
         if (isset($cpmTransId)) {
@@ -152,7 +152,7 @@ class CinetpayController extends AbstractController
                             $scout->setGroupe($groupe);
                             $scout->setStatut($scout_statut);
                             $scout->setBranche($branche);
-                            $scout->setModifieLe($date_maj);
+                            //$scout->setModifieLe($date_maj);
 
                             //
                             $scout->setCotisation($this->gestionScout->cotisation());
@@ -181,8 +181,8 @@ class CinetpayController extends AbstractController
                             $scout->setCotisation($this->gestionScout->cotisation());
                             $scout->setMatricule($matricule);
                             $scout->setSlug($slug);
-                            $scout->setModifieLe($date_maj);
-                            $scout->setPublieLe($date_maj);
+                            //$scout->setModifieLe($date_maj);
+                            //$scout->setPublieLe($date_maj);
                         }
 
                         $em->persist($scout);
