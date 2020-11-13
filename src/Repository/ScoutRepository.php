@@ -161,6 +161,28 @@ class ScoutRepository extends ServiceEntityRepository
         return $q->getQuery()->getResult();
     }
 
+    /**
+     * @param $scout
+     * @return int|mixed|string
+     */
+    public function findRegDistGroup($scout, $region = null)
+    {
+        $query = $this->createQueryBuilder('s')
+            ->addSelect( 'g')
+            ->addSelect( 'd')
+            ->addSelect( 'r')
+            ->leftJoin('s.groupe', 'g')
+            ->leftJoin('g.district', 'd')
+            ->leftJoin('d.region', 'r')
+            ->where('s.id = :scout')
+            ;
+        if ($region){
+            $query->andWhere('r.id >= 4')->andWhere('r.id <= 18');
+        }
+        $q = $query->setParameter('scout', $scout)->getQuery()->getResult();
+        return $q;
+    }
+
     // /**
     //  * @return Scout[] Returns an array of Scout objects
     //  */
