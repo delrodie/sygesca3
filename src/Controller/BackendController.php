@@ -104,8 +104,11 @@ class BackendController extends AbstractController
         foreach ($regions as $region){
             $scouts = $this->scoutRepository->findByRegion($region->getId(),$annee);
             $nombre[$i] = ['id'=>count($scouts)];
-            $objectifs[$i] = ['val'=>$this->objectifRepository->findOneBy(['region'=>$region])->getValeur()];
-            $listes[$i] = ['region'=>$region->getNom(), 'nombre'=>count($scouts)];
+            $objectif = $this->objectifRepository->findOneBy(['region'=>$region])->getValeur();
+
+            $objectifs[$i] = ['val'=>$objectif];
+            $pourcentage = count($scouts)/ $objectif*100;
+            $listes[$i] = ['region'=>$region->getNom(), 'nombre'=>count($scouts), 'pourcentage'=>$pourcentage,'objectif'=>$objectif];
             $i = $i +1;
         }
         //dd($nombre);
@@ -114,7 +117,7 @@ class BackendController extends AbstractController
             'regions' => $regions,
             'nombre' => $nombre,
             'objectifs' => $objectifs,
-            'listes' => $listes
+            'listes' => $listes,
         ]);
     }
 

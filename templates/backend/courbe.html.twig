@@ -2,14 +2,14 @@
 {% block refresh %}
     <meta http-equiv="refresh" content="600">
 {% endblock %}
-{% block title %}{{parent()}} Tableau de bord{% endblock %}
+{% block title %}{{parent()}} Télémetrie{% endblock %}
 
 {% block body %}
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-title-box">
-                    <h4 class="page-title">Liste des adherants {{ annee }}</h4>
+                    <h4 class="page-title">Télémetrie de l'effectif</h4>
                 </div>
             </div>
         </div>
@@ -33,13 +33,61 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <div id="chart-with-area" class="ct-chart ct-golden-section"></div>
                         <h4 class="mt-5 text-center"><u>Graphique linéaire par diocèses des adhésions {{ annee }}</u></h4>
                         <h5 class="mt-5 header-title">Les courbes rouge et bleue correspondent respectivement aux objectifs assignés et aux nombres des scouts par régions</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="d-inline-block">Objectifs par région</h6>
+                        <ul class="nav nav-pills mb-3 float-right" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link active"  onclick="imprimer('impression')">Imprimer</a>
+                            </li>
+                        </ul>
+
+                        <div class="boxscroll w-100" id="impression">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="user-history" role="tabpanel" >
+                                    <div class="table-responsive user-history">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th class="border-top-0">REGIONS</th>
+                                                <th class="border-top-0 text-center">OBJECTIFS</th>
+                                                <th class="border-top-0 text-center">INSCRITS</th>
+                                                <th class="border-top-0 text-center">PARCOURS</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for liste in listes %}
+                                                <tr>
+                                                    <td>
+                                                        {{ liste.region }}
+                                                    </td>
+                                                    <td class="text-center">{{liste.objectif|number_format(0,'','.')}}</td>
+                                                    <td class="text-center">{{liste.nombre|number_format(0,'','.')}}</td>
+
+                                                    <td class="text-center">{{ liste.pourcentage|number_format(2,',','') }} %</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,5 +117,14 @@
                 );
 
         });
+    </script>
+    <script>
+        function imprimer(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
     </script>
 {% endblock %}
