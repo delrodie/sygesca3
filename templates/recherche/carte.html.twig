@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            <div class="wrapper col-md-8 offset-md-2">
+            <div class="wrapper col-md-10 offset-md-2">
                 <div class="row">
                     <div class="col-12 text-center mb-3 mt-1">
                         <a href="#" onclick="imprimer('impressionCarte')" class="btn btn-primary">Imprimer</a>
@@ -13,21 +13,21 @@
                     </div>
 
                 </div>
-                <div class="card " id="impressionCarte">
+                <div class="card " id="impressionCarte" style="width: 800px;">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-8" style="border: #cccccc solid 1px">
+                            <div class="col-sm-7" style="border: #cccccc solid 1px">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <img src="images/ascci.png" width="60" class="rounded-circle"
+                                        <img src="{{ absolute_url(asset('assets/images/ascci.png')) }}" width="60" class="rounded-circle"
                                              alt="" style="float: left">
-                                        <H4 class="h4 font-primary mt-3 text-center">CARTE SCOUTE PROVISOIRE</H4>
+                                        <H4 class="h5 font-primary mt-3 text-center">CARTE SCOUTE PROVISOIRE</H4>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
-                                    <div class="col-md-7">
+                                    <div class="col-sm-7">
                                         <div class="row">
-                                            <div class="col-md-12 mt-3">
+                                            <div class="col-md-12 mt-3" style="font-size: 0.9rem;">
                                                 <div class="text-left">Matricule: <span style="color: orangered; font-weight: bold;">{{ scout.matricule}}</span></div>
                                                 <div class="text-left">Nom: <span style="font-weight: bold;">{{ scout.nom|upper}}</span></div>
                                                 <div class="text-left">Prenoms: <span style="font-weight: bold;">{{ scout.prenoms|upper}}</span></div>
@@ -38,7 +38,7 @@
                                             <div class="col-md-12 text-right mb-5">
                                                 <!--<div class="text-right">Carte N°: <span style="color: darkred; font-weight: bold;">{{ scout.matricule}}</span></div>-->
                                             </div>
-                                            <div class="col-md-12 text-left">
+                                            <div class="col-md-12 text-left" style="font-size: 0.9rem;">
                                                 <div>Région: <span style="font-weight: bold;">{{ scout.groupe.district.region.nom}}</span></div>
                                                 <div>District: <span style="font-weight: bold;">{{ scout.groupe.district.nom}}</span></div>
                                                 <div>Groupe: <span style="font-weight: bold;">{{ scout.groupe.paroisse}}</span></div>
@@ -60,7 +60,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-5 text-center">
+                                    <div class="col-sm-5 text-center" style="font-size: 0.9rem;">
                                         <div class="text-center">Carte N°: <span style="color: darkred; font-weight: bold; font-size: 1.2em">{{ scout.carte}}</span></div>
                                         <div style="border: #cccccc solid 1px; width: 175px; height: 175px; margin-left: 20px;"></div>
                                         <div>
