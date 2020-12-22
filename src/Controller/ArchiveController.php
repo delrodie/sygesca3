@@ -109,7 +109,8 @@ class ArchiveController extends AbstractController
             //'cotisations' => $this->cotisationRepository->findBy(['annee'=>$annee]),
             'listes' => $listes,
             'region' => $this->getDoctrine()->getRepository(Region::class)->findOneBy(['id'=>$region]),
-            'districts' => $this->getDoctrine()->getRepository(District::class)->findBy([],['nom'=>"ASC"])
+            'districts' => $this->getDoctrine()->getRepository(District::class)->findBy([],['nom'=>"ASC"]),
+            'district' => $this->getDoctrine()->getRepository(District::class)->findOneBy(['id'=>$district]),
         ]);
     }
 }
