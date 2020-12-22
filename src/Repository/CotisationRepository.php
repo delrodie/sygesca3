@@ -19,16 +19,46 @@ class CotisationRepository extends ServiceEntityRepository
         parent::__construct($registry, Cotisation::class);
     }
 
-    public function findByAnnee($annee)
+    /**
+     * Liste des scouts en fonction de l'année
+     *
+     * @param $annee
+     * @return int|mixed|string
+     */
+    public function findByAnnee($annee, $region = null, $district = null)
     {
-        return $this->createQueryBuilder('c')
+        $q = $this->createQueryBuilder('c')
             ->addSelect('s')
-            ->join('c.scout', 's')
-            ->where('c.annee = :annee')
-            ->setParameter('annee', $annee)
-            ->getQuery()->getResult()
-            ;
+            ->addSelect('g')
+            ->addSelect('d')
+            ->addSelect('r')
+            ->leftJoin('c.scout', 's')
+            ->leftJoin('s.groupe', 'g')
+            ->leftJoin('g.district', 'd')
+            ->leftJoin('d.region', 'r')
+            ->where('c.annee = :annee');
+
+        if ($region){
+            $q->andWhere('r.id = :region')
+                ->setParameters([
+                    'annee' => $annee,
+                    'region' => $region
+                ]);
+        }elseif ($district){
+            $q->andWhere('d.id = :district')
+                ->setParameters([
+                    'annee' => $annee,
+                    'district' => $district
+                ]);
+        }
+        else{
+            $q->setParameter('annee', $annee);
+        }
+
+        return $q->getQuery()->getResult();
     }
+
+
 
     // /**
     //  * @return Cotisation[] Returns an array of Cotisation objects

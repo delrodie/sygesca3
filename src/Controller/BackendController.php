@@ -127,7 +127,7 @@ class BackendController extends AbstractController
     public function adherant()
     {
         $annee = $this->gestionScout->cotisation();
-        $cotisations = $this->cotisationRepository->findBy(['annee'=>$annee]);
+        $cotisations = $this->cotisationRepository->findByAnnee($annee);
         $listes=[];
         $i = 0;
         foreach ($cotisations as $cotisation){
