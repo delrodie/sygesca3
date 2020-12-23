@@ -23,9 +23,12 @@ class CotisationRepository extends ServiceEntityRepository
      * Liste des scouts en fonction de l'année
      *
      * @param $annee
+     * @param null $region
+     * @param null $district
+     * @param null $groupe
      * @return int|mixed|string
      */
-    public function findByAnnee($annee, $region = null, $district = null)
+    public function findByAnnee($annee, $region = null, $district = null, $groupe=null)
     {
         $q = $this->createQueryBuilder('c')
             ->addSelect('s')
@@ -49,6 +52,12 @@ class CotisationRepository extends ServiceEntityRepository
                 ->setParameters([
                     'annee' => $annee,
                     'district' => $district
+                ]);
+        }elseif ($groupe){
+            $q->andWhere('g.id = :groupe')
+                ->setParameters([
+                    'annee' => $annee,
+                    'groupe' => $groupe
                 ]);
         }
         else{

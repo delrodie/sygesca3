@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Region;
 use App\Repository\CotisationRepository;
 use App\Repository\ObjectifRepository;
 use App\Repository\RegionRepository;
@@ -147,7 +148,8 @@ class BackendController extends AbstractController
         return $this->render('backend/adherant_liste.html.twig', [
             'annee' => $annee,
             //'cotisations' => $this->cotisationRepository->findBy(['annee'=>$annee]),
-            'listes' => $listes
+            'listes' => $listes,
+            'regions' => $this->getDoctrine()->getRepository(Region::class)->findBy([],['nom'=>"ASC"])
         ]);
     }
 }
