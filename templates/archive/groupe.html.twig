@@ -16,8 +16,16 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row mt-2 mb-5">
-                            <div class="col-md-4 text-left">
-                                <h6>Filtrez la liste en sélectionnant le district ou le groupe</h6>
+                            <div class="col-md-4 text-center">
+                                <form action="{{ path('archive_region', {'annee': annee}) }}" onchange="this.submit()">
+                                    <select name="archive_district" id="" class="form-control select">
+                                        <option value="">-- Selection la région --</option>
+                                        <option value=""></option>
+                                        {% for region in regions %}
+                                            <option value="{{ region.id }}">{{ region.nom }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </form>
                             </div>
                             <div class="col-md-4 text-center">
                                 <form action="{{ path('archive_district', {'annee': annee, 'region': region.slug}) }}" onchange="this.submit()">

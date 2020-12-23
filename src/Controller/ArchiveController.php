@@ -113,7 +113,8 @@ class ArchiveController extends AbstractController
             'region' => $this->getDoctrine()->getRepository(Region::class)->findOneBy(['id'=>$region]),
             'districts' => $this->getDoctrine()->getRepository(District::class)->findBy(['region'=>$region],['nom'=>"ASC"]),
             'district' => $this->getDoctrine()->getRepository(District::class)->findOneBy(['id'=>$district]),
-            'groupes' => $this->getDoctrine()->getRepository(Groupe::class)->findBy(['district'=>$district])
+            'groupes' => $this->getDoctrine()->getRepository(Groupe::class)->findBy(['district'=>$district]),
+            'regions' => $this->getDoctrine()->getRepository(Region::class)->findBy([],['nom'=>"ASC"])
         ]);
     }
 
@@ -151,7 +152,8 @@ class ArchiveController extends AbstractController
             'districts' => $this->getDoctrine()->getRepository(District::class)->findBy(['region'=>$region],['nom'=>"ASC"]),
             'district' => $this->getDoctrine()->getRepository(District::class)->findOneBy(['id'=>$groupeEntity->getDistrict()->getId()]),
             'groupes' => $this->getDoctrine()->getRepository(Groupe::class)->findBy(['district'=>$groupeEntity->getDistrict()->getId()]),
-            'groupe' => $groupeEntity
+            'groupe' => $groupeEntity,
+            'regions' => $this->getDoctrine()->getRepository(Region::class)->findBy([],['nom'=>"ASC"])
         ]);
     }
 }
