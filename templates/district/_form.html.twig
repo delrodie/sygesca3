@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <div class="form-group select">
+                {{ form_row(form.region) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.nom) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.doyenne) }}
+            </div>
+            {{ form_widget(form) }}
+            <div class="text-right mt-5">
+                <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+            </div>
+
+        </div>
+    </div>
+{{ form_end(form) }}

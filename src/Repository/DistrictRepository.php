@@ -19,7 +19,14 @@ class DistrictRepository extends ServiceEntityRepository
         parent::__construct($registry, District::class);
     }
 
-
+    public function findList()
+    {
+        return $this->createQueryBuilder('d')
+            ->addSelect('r')
+            ->leftJoin('d.region', 'r')
+            ->getQuery()->getResult()
+            ;
+    }
 
     // /**
     //  * @return District[] Returns an array of District objects

@@ -1,0 +1,53 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{ parent() }} Gestion des districts{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">Liste des groupes du district {{ district.nom }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row mt-2 mb-5">
+                            <div class="col-md-4 offset-8 text-right">
+                                <a href="{{ path('admin_district_index') }}" class="btn btn-primary">
+                                    <i class="fa fa-reply"></i> Retour à la liste
+                                </a>
+                            </div>
+                        </div>
+
+                        {{ include('district/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+                        <div class="row">
+                            <div class="col-md-6 offset-3"> {{ include('district/_delete_form.html.twig') }}</div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .select select option{
+            color: black;
+        }
+        .formulaire input, select{
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    </style>
+{% endblock %}

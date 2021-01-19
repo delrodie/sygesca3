@@ -19,6 +19,17 @@ class GroupeRepository extends ServiceEntityRepository
         parent::__construct($registry, Groupe::class);
     }
 
+    public function findByDistrict($district)
+    {
+        return $this->createQueryBuilder('g')
+            ->addSelect('d')
+            ->leftJoin('g.district', 'd')
+            ->where('d.slug = :district')
+            ->orderBy('g.paroisse', 'ASC')
+            ->setParameter('district', $district)
+            ->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Groupe[] Returns an array of Groupe objects
     //  */

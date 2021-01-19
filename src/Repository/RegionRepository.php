@@ -32,6 +32,11 @@ class RegionRepository extends ServiceEntityRepository
             ;
     }
 
+    public function liste()
+    {
+        return $this->createQueryBuilder('r');
+    }
+
     // /**
     //  * @return Region[] Returns an array of Region objects
     //  */
