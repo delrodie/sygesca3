@@ -19,6 +19,10 @@ class GroupeRepository extends ServiceEntityRepository
         parent::__construct($registry, Groupe::class);
     }
 
+    /**
+     * @param $district
+     * @return int|mixed|string
+     */
     public function findByDistrict($district)
     {
         return $this->createQueryBuilder('g')
@@ -28,6 +32,23 @@ class GroupeRepository extends ServiceEntityRepository
             ->orderBy('g.paroisse', 'ASC')
             ->setParameter('district', $district)
             ->getQuery()->getResult();
+    }
+
+    public function findEquipeDistrict($district)
+    {
+        return $this->createQueryBuilder('g')
+            ->addSelect('d')
+            ->leftJoin('g.district', 'd')
+            ->where('d.id = :district')
+            ->andWhere('g.paroisse LIKE :groupe')
+            ->orWhere('g.paroisse LIKE :groupe2')
+            ->setParameters([
+                'district' => $district,
+                'groupe' => "%Equipe de district%",
+                'groupe2' => "%EQUIPES de distrticts"
+            ])
+            ->getQuery()->getResult()
+            ;
     }
 
     // /**
