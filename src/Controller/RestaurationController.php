@@ -57,6 +57,6 @@ class RestaurationController extends AbstractController
      */
     public function equipe()
     {
-        
+
     }
 }
