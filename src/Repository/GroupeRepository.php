@@ -19,6 +19,17 @@ class GroupeRepository extends ServiceEntityRepository
         parent::__construct($registry, Groupe::class);
     }
 
+    public function findList()
+    {
+        return $this->createQueryBuilder('g')
+            ->addSelect('d')
+            ->addSelect('r')
+            ->leftJoin('g.district', 'd')
+            ->leftJoin('d.region', 'r')
+            ->getQuery()->getResult()
+            ;
+    }
+
     /**
      * @param $district
      * @return int|mixed|string
@@ -41,11 +52,9 @@ class GroupeRepository extends ServiceEntityRepository
             ->leftJoin('g.district', 'd')
             ->where('d.id = :district')
             ->andWhere('g.paroisse LIKE :groupe')
-            ->orWhere('g.paroisse LIKE :groupe2')
             ->setParameters([
                 'district' => $district,
-                'groupe' => "%Equipe de district%",
-                'groupe2' => "%EQUIPES de distrticts"
+                'groupe' => "%Equipe%"
             ])
             ->getQuery()->getResult()
             ;

@@ -23,7 +23,7 @@ class RestaurationController extends AbstractController
             $groupes  =  $this->getDoctrine()->getRepository(Groupe::class)->findEquipeDistrict($district->getId());
             if ($groupes){
                 dd($groupes);
-            } 
+            }
         }
 
         return $this->render('restauration/index.html.twig', [
