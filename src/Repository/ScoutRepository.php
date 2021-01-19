@@ -183,6 +183,25 @@ class ScoutRepository extends ServiceEntityRepository
         return $q;
     }
 
+    public function findByFonction($fonction, $annee)
+    {
+        return $this->createQueryBuilder('s')
+            ->addSelect('g')
+            ->addSelect('d')
+            ->addSelect('r')
+            ->leftJoin('s.groupe', 'g')
+            ->leftJoin('g.district', 'd')
+            ->leftJoin('d.region', 'r')
+            ->where('s.fonction LIKE :fonction')
+            ->andWhere('s.cotisation = :annee')
+            ->setParameters([
+                'fonction' => "%".$fonction."%",
+                'annee' => $annee
+            ])
+            ->getQuery()->getResult()
+            ;
+    }
+
     // /**
     //  * @return Scout[] Returns an array of Scout objects
     //  */

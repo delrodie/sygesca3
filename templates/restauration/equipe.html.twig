@@ -1,0 +1,113 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{parent()}} Liste des equipes de districts {% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">Liste des equipes de districts</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row mt-2 mb-5">
+                            <div class="col-md-4 offset-8 text-right">
+                                <a href="{{ path('admin_district_new') }}" class="btn btn-primary">
+                                    <i class="fa fa-plus-circle"></i> Ajouter
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                {% for label, messages in app.flashes %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-{{ label }} alert-dismissible fade show d-flex align-items-center" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            {% if label == 'success' %}
+                                                <i class="mdi mdi-checkbox-marked-circle font-32"></i><strong class="pr-1">Success !</strong> {{ message }}
+                                            {% else %}
+                                                <i class="mdi mdi-close-circle font-32"></i><strong class="pr-1">Echec !</strong> {{ message }}
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>REGIONS</th>
+                                <th>DISTRICTS</th>
+                                <th>NOMS & PRENOMS</th>
+                                <th>SEXES</th>
+                                <th>FONCTIONS</th>
+                                <th>CONTACTS</th>
+                                <th>CARTES</th>
+                                <th>MATRICULES</th>
+                            </tr>
+                            </thead>
+
+
+                            <tbody>
+                            {% for liste in listes %}
+                                <tr style="color: #fff">
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ liste.region }}</td>
+                                    <td class="">{{ liste.district }}</td>
+                                    <td class="">{{ liste.nom|upper }} {{ liste.prenoms|title }}</td>
+                                    <td class="text-center">{{ liste.sexe }}</td>
+                                    <td>{{ liste.fonction }}</td>
+                                    <td class="text-center">{{ liste.contact }}</td>
+                                    <td class="text-center">{{ liste.carte }}</td>
+                                    <td class="text-center">{{ liste.matricule }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.bootstrap4.min.css')) }}">
+    <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.bootstrap4.min.css')) }}">
+    <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/responsive.bootstrap4.min.css')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/backoffice/plugins/select2/select2.min.css') }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/jquery.dataTables.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.bootstrap4.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.buttons.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.bootstrap4.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/jszip.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/pdfmake.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/vfs_fonts.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.html5.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.print.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.colVis.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/dataTables.responsive.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/datatables/responsive.bootstrap4.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/pages/datatables.init.js')) }}"></script>
+    <script src="{{ asset('assets/backoffice/plugins/select2/select2.min.js') }}"></script>
+    <script>
+        $().ready(function () {
+            $('.select').select2();
+        })
+    </script>
+{% endblock %}

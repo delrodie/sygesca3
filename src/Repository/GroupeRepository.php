@@ -45,6 +45,10 @@ class GroupeRepository extends ServiceEntityRepository
             ->getQuery()->getResult();
     }
 
+    /**
+     * @param null $district
+     * @return int|mixed|string
+     */
     public function findEquipeDistrict($district = null)
     {
         $q = $this->createQueryBuilder('g')
@@ -65,6 +69,8 @@ class GroupeRepository extends ServiceEntityRepository
         }
         return $q->getQuery()->getResult();
     }
+
+
 
     // /**
     //  * @return Groupe[] Returns an array of Groupe objects
