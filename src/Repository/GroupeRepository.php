@@ -45,19 +45,25 @@ class GroupeRepository extends ServiceEntityRepository
             ->getQuery()->getResult();
     }
 
-    public function findEquipeDistrict($district)
+    public function findEquipeDistrict($district = null)
     {
-        return $this->createQueryBuilder('g')
+        $q = $this->createQueryBuilder('g')
             ->addSelect('d')
+            ->addSelect('r')
             ->leftJoin('g.district', 'd')
-            ->where('d.id = :district')
-            ->andWhere('g.paroisse LIKE :groupe')
-            ->setParameters([
-                'district' => $district,
-                'groupe' => "%Equipe%"
-            ])
-            ->getQuery()->getResult()
-            ;
+            ->leftJoin('d.region', 'r')
+            ->where('g.paroisse LIKE :groupe')
+        ;
+        if ($district){
+            $q->andWhere('d.id = :district')
+                ->setParameters([
+                    'district' => $district,
+                    'groupe' => "%Equipe%"
+                ]);
+        }else{
+            $q->setParameter('groupe', "%Equipe%");
+        }
+        return $q->getQuery()->getResult();
     }
 
     // /**
