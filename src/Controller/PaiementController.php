@@ -24,14 +24,16 @@ class PaiementController extends AbstractController
         $region_request = $request->get('request_region');
         $district_request = $request->get('request_district'); //dd($region_request);
         $groupe_request = $request->get('request_groupe'); //dd($region_request);
-        if ($region_request)
+        if ($region_request){
             $paiements = $this->getDoctrine()->getRepository(UserInfo2020::class)->findList($region_request);
-        elseif ($district_request)
+        }elseif ($district_request){
             $paiements = $this->getDoctrine()->getRepository(UserInfo2020::class)->findList(null,$district_request);
-        elseif ($groupe_request)
+        }elseif ($groupe_request){
             $paiements = $this->getDoctrine()->getRepository(UserInfo2020::class)->findList(null,null,$groupe_request);
-        else
+        }
+        else{
             $paiements = $this->getDoctrine()->getRepository(UserInfo2020::class)->findList();
+        } dd($paiements);
 
         $listes=[]; $i=0;
         foreach ($paiements as $paiement){
