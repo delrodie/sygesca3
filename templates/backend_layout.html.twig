@@ -51,7 +51,6 @@
                                 <a href="javascript:void(0);" class="waves-effect waves-light"><i class="mdi mdi-bullseye"></i> <span> Gestion</span> <span class="float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{ path('backend_liste_adherant') }}">Scout</a></li>
-                                    <li><a href="{{ path('backend_user_paiement') }}">Paiement</a></li>
                                 </ul>
                             </li>
 
@@ -94,6 +93,14 @@
                                 <ul class="list-unstyled">
                                     <li><a href="#"> Gestionnaire</a></li>
                                     <li><a href="#"> Utilisateur</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="has_sub">
+                                <a href="javascript:void(0);" class="waves-effect waves-light"><i class="mdi mdi-file"></i><span> Paiement </span> </a>
+                                <ul class="list-unstyled">
+                                    <li><a href="{{ path('backend_user_paiement') }}"> Validé</a></li>
+                                    <li><a href="{{ path('backend_user_paiement_unknow') }}"> Non validé</a></li>
                                 </ul>
                             </li>
 

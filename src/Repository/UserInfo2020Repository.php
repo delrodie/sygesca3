@@ -19,7 +19,7 @@ class UserInfo2020Repository extends ServiceEntityRepository
         parent::__construct($registry, UserInfo2020::class);
     }
 
-    public function findList($region=null, $district=null, $groupe=null)
+    public function findList($valid, $region=null, $district=null, $groupe=null)
     {
         $q =  $this->createQueryBuilder('u')
             ->addSelect('r')
@@ -30,18 +30,28 @@ class UserInfo2020Repository extends ServiceEntityRepository
             ->leftJoin('u.district', 'd')
             ->leftJoin('u.groupe', 'g')
             ->leftJoin('u.fonction', 'f')
+            ->where('u.statusPaiement = :valid')
             ;
         if ($region){
-            $q->where('r.id = :region')
-                ->setParameter('region', $region);
+            $q->andWhere('r.id = :region')
+                ->setParameters([
+                    'valid' => $valid,
+                    'region' => $region
+                ]);
         }elseif ($district){
-            $q->where('d.id = :district')
-                ->setParameter('district', $district);
+            $q->andWhere('d.id = :district')
+                ->setParameters([
+                    'valid' => $valid,
+                    'district' => $district
+                ]);
         }elseif ($groupe){
-            $q->where('g.id = :groupe')
-                ->setParameter('groupe', $groupe);
+            $q->andWhere('g.id = :groupe')
+                ->setParameters([
+                    'groupe' => $groupe,
+                    'valid' => $valid
+                ]);
         }else{
-            $q=$q;
+            $q->setParameter('valid', $valid);
         }
 
         return $q->getQuery()->getResult();
