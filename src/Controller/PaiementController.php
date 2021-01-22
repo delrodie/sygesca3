@@ -121,11 +121,12 @@ class PaiementController extends AbstractController
             if ($paiement->getRegion()) $var_region = $paiement->getRegion()->getNom(); else $var_region = null;
             if ($paiement->getDistrict()) $var_district = $paiement->getDistrict()->getNom(); else $var_district = null;
             if ($paiement->getGroupe()) $var_groupe = $paiement->getGroupe()->getParoisse(); else $var_groupe = null;
+            if ($paiement->getFonction()) $var_fonction = $paiement->getFonction()->getLibelle(); else $var_fonction = null;
             $listes[$i++]=[
                 'region' => $var_region,
                 'district' => $var_district,
                 'groupe' => $var_groupe,
-                'fonction' => $paiement->getFonction()->getLibelle(),
+                'fonction' => $var_fonction,
                 'nom' => $paiement->getNom(),
                 'prenoms' => $paiement->getPrenoms(),
                 'date_naissance' => $paiement->getDatenaissance(),
