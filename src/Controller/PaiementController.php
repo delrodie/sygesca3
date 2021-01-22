@@ -37,9 +37,9 @@ class PaiementController extends AbstractController
 
         $listes=[]; $i=0;
         foreach ($paiements as $paiement){
-            if ($paiement->getRegion()->getNom()) $var_region = $paiement->getRegion()->getNom(); else $var_region = null;
-            if ($paiement->getDistrict()->getNom()) $var_district = $paiement->getDistrict()->getNom(); else $var_district = null;
-            if ($paiement->getGroupe()->getParoisse()) $var_groupe = $paiement->getGroupe()->getParoisse(); else $var_groupe = null;
+            if ($paiement->getRegion()) $var_region = $paiement->getRegion()->getNom(); else $var_region = null;
+            if ($paiement->getDistrict()) $var_district = $paiement->getDistrict()->getNom(); else $var_district = null;
+            if ($paiement->getGroupe()) $var_groupe = $paiement->getGroupe()->getParoisse(); else $var_groupe = null;
             $listes[$i++]=[
                 'region' => $var_region,
                 'district' => $var_district,
