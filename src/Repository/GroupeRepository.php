@@ -70,7 +70,22 @@ class GroupeRepository extends ServiceEntityRepository
         return $q->getQuery()->getResult();
     }
 
-
+    /**
+     * @param $groupe
+     * @return int|mixed|string
+     */
+    public function findByID($groupe)
+    {
+        return $this->createQueryBuilder('g')
+            ->addSelect('d')
+            ->addSelect('r')
+            ->leftJoin('g.district', 'd')
+            ->leftJoin('d.region', 'r')
+            ->where('g.id = :groupe')
+            ->setParameter('groupe', $groupe)
+            ->getQuery()->getSingleResult()
+            ;
+    }
 
     // /**
     //  * @return Groupe[] Returns an array of Groupe objects

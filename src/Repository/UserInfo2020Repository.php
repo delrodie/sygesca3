@@ -19,6 +19,34 @@ class UserInfo2020Repository extends ServiceEntityRepository
         parent::__construct($registry, UserInfo2020::class);
     }
 
+    public function findList($region=null, $district=null, $groupe=null)
+    {
+        $q =  $this->createQueryBuilder('u')
+            ->addSelect('r')
+            ->addSelect('d')
+            ->addSelect('g')
+            ->addSelect('f')
+            ->leftJoin('u.region', 'r')
+            ->leftJoin('u.district', 'd')
+            ->leftJoin('u.groupe', 'g')
+            ->leftJoin('u.fonction', 'f')
+            ;
+        if ($region){
+            $q->where('r.id = :region')
+                ->setParameter('region', $region);
+        }elseif ($district){
+            $q->where('d.id = :district')
+                ->setParameter('district', $district);
+        }elseif ($groupe){
+            $q->where('g.id = :groupe')
+                ->setParameter('groupe', $groupe);
+        }else{
+            $q=$q;
+        }
+
+        return $q->getQuery()->getResult();
+    }
+
     // /**
     //  * @return UserInfo2020[] Returns an array of UserInfo2020 objects
     //  */
