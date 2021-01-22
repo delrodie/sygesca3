@@ -33,7 +33,7 @@ class PaiementController extends AbstractController
         }
         else{
             $paiements = $this->getDoctrine()->getRepository(UserInfo2020::class)->findList();
-        } //dd($paiements);
+        } dd($paiements);
 
         $listes=[]; $i=0;
         foreach ($paiements as $paiement){
