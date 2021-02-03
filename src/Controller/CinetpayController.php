@@ -76,7 +76,7 @@ class CinetpayController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $date_maj = Date('Y-m-d h:i:s'); //dd($date_maj);
 
-        $cpmTransId = $request->get('cpm_trans_id');
+        $cpmTransId = $request->get('cpm_trans_id'); //dd($cpmTransId);
         if (isset($cpmTransId)) {
 
 
