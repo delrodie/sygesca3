@@ -11,12 +11,15 @@
     color: white;
     text-align: center;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-    background: #e31d1a;
+    background: #FF6F00;
     border: 0;
-    border-bottom: 3px solid #0c5201;
+    border-bottom: 3px solid #071689  ;
     cursor: pointer;
     -webkit-box-shadow: inset 0 -3px #FFFFFF;
     box-shadow: inset 0 -3px #FFFFFF;
+    &:hover{
+      border-bottom: 3px solid #FF6F00;
+    }
   }
   &.vert{
     color: white;
@@ -24,10 +27,41 @@
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
     background: #0c5201;
     border: 0;
-    border-bottom: 3px solid #e31d1a;
+    border-bottom: 3px solid #071689;
     cursor: pointer;
     -webkit-box-shadow: inset 0 -3px #FFFFFF;
     box-shadow: inset 0 -3px #FFFFFF;
+    &:hover{
+      border-bottom: 3px solid #0c5201;
+    }
+  }
+  &.jaune{
+    color: black;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    background: #ffff00;
+    border: 0;
+    border-bottom: 3px solid #071689;
+    cursor: pointer;
+    -webkit-box-shadow: inset 0 -3px #FFFFFF;
+    box-shadow: inset 0 -3px #FFFFFF;
+    &:hover{
+      border-bottom: 3px solid #ffff00;
+    }
+  }
+  &.rouge{
+    color: white;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    background: red;
+    border: 0;
+    border-bottom: 3px solid #071689;
+    cursor: pointer;
+    -webkit-box-shadow: inset 0 -3px #FFFFFF;
+    box-shadow: inset 0 -3px #FFFFFF;
+    &:hover{
+      border-bottom: 3px solid red;
+    }
   }
 }
 .btn-xlarge:active {
@@ -38,6 +72,9 @@
 }
 .btn-xlarge:hover {
   background: #071689;
+  &.jaune{
+    color: white;
+  }
 }
 .logo, .bouton{
   width: 100%;
