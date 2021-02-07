@@ -79,12 +79,12 @@ a:hover {
   margin-top: 10px;
 }
 .inner .logo {
-  width: 60%;
+  width: 50%;
   text-align: center;
 }
 
 form {
-  width: 60%;
+  width: 50%;
   padding-left: 45px;
 }
 
@@ -97,11 +97,31 @@ form {
 .form-group .form-wrapper:first-child {
   margin-right: 20px;
 }
+.form-group .form-wrapper-erreur {
+  width: 100%;
+}
+.form-group .form-wrapper-erreur:first-child {
+  margin-right: 20px;
+}
+.form-group .form-wrapper-erreur.col30 {
+  width: 30%;
+}
+.form-group .form-wrapper-erreur.col50 {
+  width: 50%;
+}
+.form-group .form-wrapper-erreur.col70 {
+  width: 70%;
+}
 
-.form-wrapper {
+form.form-erreur {
+  width: 70%;
+  padding-left: 45px;
+}
+
+.form-wrapper, .form-wrapper-erreur {
   margin-bottom: 17px;
 }
-.form-wrapper label {
+.form-wrapper label, .form-wrapper-erreur label {
   margin-bottom: 9px;
   display: block;
 }
@@ -241,10 +261,21 @@ button:hover:before {
     text-align: center;
   }
 
+  .form-group {
+    display: inline;
+  }
+
   form {
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
+  }
+  form.form-erreur {
+    width: 100%;
+    padding-left: 15px;
+  }
+  form.form-erreur .form-group .form-wrapper-erreur.col30, form.form-erreur .form-group .form-wrapper-erreur.col70 {
+    width: 100%;
   }
 }
 

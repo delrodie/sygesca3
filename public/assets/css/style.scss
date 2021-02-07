@@ -84,8 +84,30 @@ form {
       margin-right: 20px;
     }
   }
+  .form-wrapper-erreur {
+    width: 100%;
+    &:first-child {
+      margin-right: 20px;
+    }
+
+    &.col30{
+      width: 30%;
+    }
+    &.col50{
+      width: 50%;
+    }
+    &.col70{
+      width: 70%;
+    }
+  }
 }
-.form-wrapper {
+
+form.form-erreur{
+  width: 70%;
+  padding-left: 45px;
+}
+
+.form-wrapper, .form-wrapper-erreur {
   margin-bottom: 17px;
   label {
     margin-bottom: 9px;
@@ -227,9 +249,24 @@ button {
 		  text-align: center;
 	  }
   }
+  .form-group{
+    display: inline;
+  }
   form {
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
+    &.form-erreur{
+      width: 100%;
+      padding-left: 15px;
+
+      .form-group{
+        .form-wrapper-erreur{
+          &.col30, &.col70{
+            width: 100%;
+          }
+        }
+      }
+    }
   }
 }

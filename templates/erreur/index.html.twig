@@ -1,0 +1,62 @@
+{% extends 'base_adhesion.html.twig' %}
+
+{% block title %}{{parent()}} Formulaire de réquête{% endblock %}
+
+{% block body %}
+    <div class="wrapper">
+        <div class="inner erreur" style="background-image: url({{ absolute_url(asset('assets/images/fond1.jpg')) }}); background-size: cover;">
+            <div class="logo"><img src="{{ absolute_url(asset('assets/images/ascci.png') )}}" alt="logo ASCCI"></div>
+
+            {{ form_start(form,{"attr":{"class":"form-erreur"}}) }}
+                <h3>Formulaire de requêtes</h3>
+                <div class="form-group">
+                    <div class="form-wrapper-erreur">
+                        {{ form_row(form.region) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-wrapper-erreur col30">{{ form_row(form.nom) }}</div>
+                    <div class="form-wrapper-erreur col70">{{ form_row(form.prenoms) }}</div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-wrapper-erreur col30"> {{ form_row(form.datenaissance) }} </div>
+                    <div class="form-wrapper-erreur col70">  {{ form_row(form.lieunaissance) }} </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-wrapper-erreur col50">  {{ form_row(form.contact) }} </div>
+                    <div class="form-wrapper-erreur col50">  {{ form_row(form.media) }} </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-wrapper-erreur">{{ form_row(form.message) }}</div>
+                </div>
+            <button>S'inscrire</button>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $().ready(function () {
+
+            {% if (message) %}
+                Swal.fire({
+                    //position: 'top-end',
+                    icon: '{{ message.statut }}',
+                    title: '{{ message.titre }}',
+                    text: '{{ message.texte|raw }}',
+                    footer: '<a href="{{ absolute_url(path('app_accueil')) }}">Retour</a>',
+                    //timer: 1500
+                }).then((result) => {
+                    if (result.value) {
+                        window.location = "{{ absolute_url(path('app_accueil')) }}";
+                    } else {
+                        window.location.reload();
+                    }
+                });
+            {% endif %}
+        });
+    </script>
+{% endblock %}
