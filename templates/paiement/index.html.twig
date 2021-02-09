@@ -57,7 +57,9 @@
                             {% for liste in listes %}
                                 <tr style="color: #fff">
                                     <td>{{ loop.index }}</td>
-                                    <td class="text-center">{{ liste.id_transaction }}</td>
+                                    <td class="text-center lien">
+                                        <a href="{{ path('recherche_carte_trouve', {'matricule': liste.matricule}) }}" target="_blank">{{ liste.id_transaction }}</a>
+                                    </td>
                                     <td class="text-center">{{ liste.status_paiement }}</td>
                                     <td class="text-center">{{ liste.statut? 'OUI' : '-'}}</td>
                                     <td>{{ liste.nom|upper }} {{ liste.prenoms|title }}</td>
@@ -86,6 +88,11 @@
     <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/buttons.bootstrap4.min.css')) }}">
     <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/datatables/responsive.bootstrap4.min.css')) }}">
     <link rel="stylesheet" href="{{ asset('assets/backoffice/plugins/select2/select2.min.css') }}">
+    <style>
+        .lien a{
+            color: white;
+        }
+    </style>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}

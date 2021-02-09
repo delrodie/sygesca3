@@ -1,0 +1,45 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{ parent() }} Gestion de la transaction {{ userInfo.idTransaction }}{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">Gestion de la transcation {{ userInfo.idTransaction }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8 offset-2">
+                                {{ form_start(form) }}
+                                <div class="row form-group mb-2">
+                                    <div class="col-md-6">{{ form_row(form.nom) }}</div>
+                                    <div class="col-md-6">{{ form_row(form.prenoms) }}</div>
+                                </div>
+                                <div class="row form-group mt-3">
+                                    <div class="col-md-6">{{ form_row(form.idTransaction) }}</div>
+                                    <div class="col-md-6">{{ form_row(form.contact) }}</div>
+                                </div>
+                                {{ form_widget(form) }}
+                                <div class="row mt-5">
+                                    <div class="col-md-12 text-right">
+                                        <a href="{{ path('backend_userinfo_search', {'id_transaction': userInfo.idTransaction}) }}" class="btn btn-outline-primary">Annuler</a>
+                                        <button class="btn btn-primary">Valider</button>
+                                    </div>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end col -->
+        </div>
+    </div>
+
+{% endblock %}

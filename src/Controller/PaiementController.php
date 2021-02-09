@@ -56,7 +56,8 @@ class PaiementController extends AbstractController
                 'contact' => $paiement->getContact(),
                 'id_transaction' => $paiement->getIdTransaction(),
                 'status_paiement' => $paiement->getStatusPaiement(),
-                'statut' => $paiement->getStatut()
+                'statut' => $paiement->getStatut(),
+                'matricule' => $paiement->getMatricule()
             ];
         } //dd($listes);
 
