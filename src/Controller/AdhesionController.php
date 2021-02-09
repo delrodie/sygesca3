@@ -101,7 +101,7 @@ class AdhesionController extends AbstractController
                 $userInfo2020->setGroupe($groupe);
                 $userInfo2020->setFonction($fonction);
                 $userInfo2020->setContact($contact);
-                $userInfo2020->setIdTransaction($id_transaction);
+                $userInfo2020->setIdTransaction($userInfo2020->getIdTransaction());
 
                 $em->flush();
 
