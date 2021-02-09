@@ -87,6 +87,11 @@ class GroupeRepository extends ServiceEntityRepository
             ;
     }
 
+    public function liste()
+    {
+        return $this->createQueryBuilder('g');
+    }
+
     // /**
     //  * @return Groupe[] Returns an array of Groupe objects
     //  */

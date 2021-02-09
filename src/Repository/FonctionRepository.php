@@ -19,6 +19,11 @@ class FonctionRepository extends ServiceEntityRepository
         parent::__construct($registry, Fonctions::class);
     }
 
+    public function liste()
+    {
+        return $this->createQueryBuilder('f');
+    }
+
     // /**
     //  * @return Fonctions[] Returns an array of Fonctions objects
     //  */

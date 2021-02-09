@@ -202,6 +202,25 @@ class ScoutRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findBySearch($variable)
+    {
+        return $this->createQueryBuilder('s')
+            ->addSelect('g')
+            ->addSelect('d')
+            ->addSelect('r')
+            ->addSelect('st')
+            ->leftJoin('s.groupe', 'g')
+            ->leftJoin('g.district', 'd')
+            ->leftJoin('d.region', 'r')
+            ->leftJoin('s.statut', 'st')
+            ->where('s.nom LIKE :variable')
+            ->orWhere('s.prenoms LIKE :variable')
+            ->orWhere('s.matricule LIKE :variable')
+            ->setParameter('variable', '%'.$variable.'%')
+            ->getQuery()->getResult()
+            ;
+    }
+
     // /**
     //  * @return Scout[] Returns an array of Scout objects
     //  */
