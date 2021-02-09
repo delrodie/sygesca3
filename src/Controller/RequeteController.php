@@ -49,7 +49,8 @@ class RequeteController extends AbstractController
                 'badge' => $badge,
                 'id' => $requete->getId(),
                 'media' => $requete->getMedia(),
-                'message' => $requete->getMessage()
+                'message' => $requete->getMessage(),
+                'created_at' => $requete->getCreatedAt()
             ];
         }
 

@@ -60,6 +60,7 @@ class ErreurType extends AbstractType
                             'image/gif',
                             'image/webp',
                             'application/pdf',
+                            'application/x-pdf',
                         ],
                         'mimeTypesMessage' => "Votre fichier doit être de type image ou pdf"
                     ])

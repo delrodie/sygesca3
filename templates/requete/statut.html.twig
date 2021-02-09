@@ -20,7 +20,7 @@
                                 <h6>Filtrez la liste en sélectionnant la région</h6>
                             </div>
                             <div class="col-md-4 text-center">
-                                <form action="{{ path('admin_requete_index') }}" onchange="this.submit()">
+                                <form action="{{ path('admin_requete_statut',{"statut": statut}) }}" onchange="this.submit()">
                                     <select name="request_region" id="" class="form-control select">
                                         <option value="">-- Selection la région --</option>
                                         <option value=""></option>
@@ -81,7 +81,6 @@
                                                 </p>
                                             </div>
                                             <div class="modal-footer">
-                                                <a  href="{{ path('admin_requete_edit', {'id': liste.id}) }}" class="btn btn-primary">Traiter</a>
                                                 <button type="button" class="btn btn-danger ml-2" data-dismiss="modal">Fermer</button>
                                             </div>
                                         </div>
