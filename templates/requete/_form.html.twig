@@ -20,6 +20,12 @@
         <div class="row mt-3">
             <div class="col-md-4">{{ form_row(form.statut) }}</div>
         </div>
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <label for="sms_content">Message</label>
+                <textarea name="sms_contenu" id="sms_content" class="form-control" rows="5"></textarea>
+            </div>
+        </div>
     </div>
     {{ form_widget(form) }}
     <div class="text-right">

@@ -6,6 +6,7 @@ use App\Entity\Region;
 use App\Entity\Requete;
 use App\Form\RequeteType;
 use App\Repository\RequeteRepository;
+use App\Utilities\Notification;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RequeteController extends AbstractController
 {
-    CONST PAS_RESOLU = "PAS ENCORE RESOLU";
+    CONST PAS_RESOLU = "PAS_RESOLU";
     CONST RESOLU = "RESOLU";
-    CONST ATTENTE = "EN ATTENTE";
+    CONST ATTENTE = "ATTENTE";
 
+    private $notification;
+
+    public function __construct(Notification $notification)
+    {
+        $this->notification = $notification;
+    }
 
     /**
      * @Route("/", name="admin_requete_index", methods={"GET"})
@@ -103,6 +110,13 @@ class RequeteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $message = $request->get('sms_contenu');
+            $phone = "225".$requete->getContact();
+            if ($message){
+                $sms = $this->notification->sms($phone, $message);
+                $this->addFlash('warning', $sms);
+            }
 
             return $this->redirectToRoute('admin_requete_index');
         }

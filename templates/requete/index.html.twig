@@ -32,6 +32,13 @@
                             </div>
                         </div>
 
+                        {% for label, messages in app.flashes %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ label }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
 
                         <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>

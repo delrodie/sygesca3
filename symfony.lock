@@ -2,6 +2,9 @@
     "cinetpay/cinetpay-php": {
         "version": "1.9.1"
     },
+    "clxcommunications/sdk-xms": {
+        "version": "1.1.1"
+    },
     "cocur/slugify": {
         "version": "v4.0.0"
     },

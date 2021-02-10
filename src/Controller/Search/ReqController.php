@@ -15,9 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ReqController extends AbstractController
 {
-    CONST PAS_RESOLU = "PAS ENCORE RESOLU";
+    CONST PAS_RESOLU = "PAS_RESOLU";
     CONST RESOLU = "RESOLU";
-    CONST ATTENTE = "EN ATTENTE";
+    CONST ATTENTE = "ATTENTE";
 
     /**
      * @Route("/{statut}", name="admin_requete_statut", methods={"GET"})
@@ -29,7 +29,7 @@ class ReqController extends AbstractController
         if (!$region_req)
             $requetes = $this->getDoctrine()->getRepository(Requete::class)->findByStatut($statut);
         else
-            $requetes = $this->getDoctrine()->getRepository(Requete::class)->findByStatut(self::PAS_RESOLU, $region_req);
+            $requetes = $this->getDoctrine()->getRepository(Requete::class)->findByStatut($statut, $region_req);
 
         $listes = []; $i = 0; //dd($requetes);
         foreach ($requetes as $requete){
