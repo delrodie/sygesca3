@@ -17,9 +17,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RequeteController extends AbstractController
 {
-    CONST PAS_RESOLU = "PAS_RESOLU";
+    CONST PAS_RESOLU = "PAS ENCORE RESOLU";
     CONST RESOLU = "RESOLU";
-    CONST ATTENTE = "ATTENTE";
+    CONST ATTENTE = "EN ATTENTE";
 
     private $notification;
 
@@ -109,6 +109,7 @@ class RequeteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $this->getDoctrine()->getManager()->flush();
 
             $message = $request->get('sms_contenu');

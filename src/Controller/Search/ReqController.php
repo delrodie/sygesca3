@@ -15,9 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ReqController extends AbstractController
 {
-    CONST PAS_RESOLU = "PAS_RESOLU";
+    CONST PAS_RESOLU = "PAS ENCORE RESOLU";
     CONST RESOLU = "RESOLU";
-    CONST ATTENTE = "ATTENTE";
+    CONST ATTENTE = "EN ATTENTE";
 
     /**
      * @Route("/{statut}", name="admin_requete_statut", methods={"GET"})

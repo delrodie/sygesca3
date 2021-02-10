@@ -51,14 +51,14 @@ class RequeteType extends AbstractType
             ->add('statut', ChoiceType::class,[
                 'attr'=>['class'=>"form-control"],
                 'choices'=>[
-                    'PAS ENCORE RESOLU' => "PAS_RESOLU",
-                    'EN ATTENTE' => "ATTENTE",
+                    'PAS ENCORE RESOLU' => "PAS ENCORE RESOLU",
+                    'EN ATTENTE' => "EN ATTENTE",
                     'RESOLU' => "RESOLU"
                 ]
             ])
             //->add('createdAt')
             ->add('region', EntityType::class,[
-                'attr'=>['class'=>'form-control js-select2'],
+                'attr'=>['class'=>'form-control select'],
                 'class'=>Region::class,
                 'query_builder'=>function(EntityRepository $er){
                     return $er->liste();
