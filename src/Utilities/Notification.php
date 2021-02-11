@@ -18,7 +18,7 @@ class Notification
         $client = new Client('221c9de9ffe24be8b366bc05d7108c1f', '973cb17d0b3b44418843e0297ff76f93');
 
         $batchParams = new MtBatchTextSmsCreate();
-        $batchParams->setSender('447537404817');
+        $batchParams->setSender('ASCCI');
         $batchParams->setRecipients([$phone]);
         $batchParams->setBody($message);
 
