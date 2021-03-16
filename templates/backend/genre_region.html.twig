@@ -1,0 +1,132 @@
+{% extends 'backend_layout.html.twig' %}
+
+{% block title %}{{parent()}} Tableau de bord{% endblock %}
+{% block page %}dashboard{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <h4 class="page-title">Tableau de bord</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row mt-2 mb-5">
+                            <div class="col-md-4 text-right">
+                                <h6>Filtrez la liste en sélectionnant la région</h6>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <form action="{{ path('genre_region', {'annee': annee}) }}" onchange="this.submit()">
+                                    <select name="genre_region" id="" class="form-control select">
+                                        <option value="">-- Selection la région --</option>
+                                        <option value=""></option>
+                                        {% for region in regions %}
+                                            <option value="{{ region.id }}">{{ region.nom }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+
+                        <h6 class="d-inline-block">Statistique par region</h6>
+                        <ul class="nav nav-pills mb-3 float-right" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link active"  onclick="imprimer('impression')">Imprimer</a>
+                            </li>
+                        </ul>
+
+                        <div class="boxscroll w-100" id="impression">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="user-history" role="tabpanel" >
+                                    <div class="table-responsive user-history">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th class="border-top-0">DISTRICT</th>
+                                                <th class="border-top-0 text-center">TOTAL</th>
+                                                <th class="border-top-0 text-center">HOMME</th>
+                                                <th class="border-top-0 text-center">FEMME</th>
+                                                <th class="border-top-0 text-center">GARCON</th>
+                                                <th class="border-top-0 text-center">FILLE</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% set total = 0 %}{% set homme=0 %}{% set femme=0 %}{% set garcon=0 %}{% set fille=0 %}
+                                            {% for genre in genres %}
+                                                <tr>
+                                                    <td>
+                                                        {{ genre.district }}
+                                                    </td>
+                                                    <td class="text-center">{{genre.total|number_format(0,'','.')}}</td>
+
+                                                    <td class="text-center">{{ genre.homme|number_format(0,'','.') }}</td>
+                                                    <td class="text-center">{{ genre.femme|number_format(0,'','.') }}</td>
+                                                    <td class="text-center"> {{ genre.garcon|number_format(0,'','.') }}</td>
+                                                    <td class="text-center">{{ genre.fille|number_format(0,'','.') }}</td>
+                                                </tr>
+                                                {% set total = total+genre.total %}{% set homme= homme+genre.homme %}
+                                                {% set femme= femme+genre.femme %}{% set garcon= garcon+genre.garcon %}
+                                                {% set fille= fille+genre.fille %}
+                                            {% endfor %}
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <th>Total</th>
+                                                <th class="text-center">{{ total|number_format(0,'','.') }}</th>
+                                                <th class="text-center">{{ homme|number_format(0,'','.') }}</th>
+                                                <th class="text-center">{{ femme|number_format(0,'','.') }}</th>
+                                                <th class="text-center">{{ garcon|number_format(0,'','.') }}</th>
+                                                <th class="text-center">{{fille|number_format(0,'','.') }}</th>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end row -->
+
+    </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ absolute_url(asset('assets/backoffice/plugins/c3/c3.min.css')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/backoffice/plugins/metro/MetroJs.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/backoffice/plugins/select2/select2.min.css') }}">
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/backoffice/plugins/metro/MetroJs.min.js') }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/d3/d3.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/backoffice/plugins/c3/c3.min.js')) }}"></script>
+    <script src="{{ asset('assets/backoffice/pages/dashborad.js') }}"></script>
+    <script>
+        $(".live-tile, .flip-list").not(".exclude").liveTile();
+    </script>
+    <script>
+        function imprimer(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script><script src="{{ asset('assets/backoffice/plugins/select2/select2.min.js') }}"></script>
+    <script>
+        $().ready(function () {
+            $('.select').select2();
+        })
+    </script>
+{% endblock %}

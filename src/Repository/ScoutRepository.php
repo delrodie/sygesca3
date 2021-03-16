@@ -221,6 +221,87 @@ class ScoutRepository extends ServiceEntityRepository
             ;
     }
 
+    /**
+     * Recherche par genre te statut par region
+     *
+     * @param $region
+     * @param $statut
+     * @param $genre
+     * @param $annee
+     * @return int|mixed|string
+     */
+    public function findByGenre($region, $statut, $genre, $annee)
+    {
+        return $this->createQueryBuilder('s')
+            ->addSelect('g')
+            ->addSelect('d')
+            ->addSelect('r')
+            ->addSelect('st')
+            ->leftJoin('s.groupe', 'g')
+            ->leftJoin('g.district', 'd')
+            ->leftJoin('d.region', 'r')
+            ->leftJoin('s.statut', 'st')
+            ->where('r.id = :region')
+            ->andWhere('st.id = :statut')
+            ->andWhere('s.sexe = :genre')
+            ->andWhere('s.cotisation = :annee')
+            ->setParameters([
+                'region' => $region,
+                'statut' => $statut,
+                'genre' => $genre,
+                'annee' => $annee
+            ])
+            ->getQuery()->getResult()
+            ;
+    }
+
+    /**
+     * @param $district
+     * @param $statut
+     * @param $genre
+     * @param $annee
+     * @return int|mixed|string
+     */
+    public function findByGenreDistrict($district, $statut, $genre, $annee)
+    {
+        return $this->createQueryBuilder('s')
+            ->addSelect('g')
+            ->addSelect('d')
+            ->addSelect('st')
+            ->leftJoin('s.groupe', 'g')
+            ->leftJoin('g.district', 'd')
+            ->leftJoin('s.statut', 'st')
+            ->where('d.id = :district')
+            ->andWhere('st.id = :statut')
+            ->andWhere('s.sexe = :genre')
+            ->andWhere('s.cotisation = :annee')
+            ->setParameters([
+                'district' => $district,
+                'statut' => $statut,
+                'genre' => $genre,
+                'annee' => $annee
+            ])
+            ->getQuery()->getResult()
+            ;
+    }
+
+    public function getNombreByDistrict($district, $annee)
+    {
+        return $this->createQueryBuilder('s')
+            ->addSelect('g')
+            ->addSelect('d')
+            ->leftJoin('s.groupe', 'g')
+            ->leftJoin('g.district', 'd')
+            ->where('d.id = :district')
+            ->andWhere('s.cotisation = :annee')
+            ->setParameters([
+                'district' => $district,
+                'annee' => $annee
+            ])
+            ->getQuery()->getResult()
+            ;
+    }
+
     // /**
     //  * @return Scout[] Returns an array of Scout objects
     //  */
