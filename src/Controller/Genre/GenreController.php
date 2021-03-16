@@ -22,6 +22,8 @@ class GenreController extends AbstractController
     CONST FEMME = "FEMME";
     CONST JEUNE = "Jeune";
     CONST ADULTE = "Adulte";
+    CONST M = "M";
+    CONST F = "F";
 
     private $gestionScout;
 
@@ -44,11 +46,11 @@ class GenreController extends AbstractController
             $statuts = $this->getDoctrine()->getRepository(Statut::class)->findAll();
             foreach ($statuts as $statut){
                 if ($statut->getLibelle() === self::JEUNE){
-                    $garcon = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($region->getId(),$statut->getId(), self::HOMME,$annee));
-                    $fille = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($region->getId(),$statut->getId(), self::FEMME,$annee));
+                    $garcon = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($region->getId(),$statut->getId(), self::HOMME,$annee, self::M));
+                    $fille = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($region->getId(),$statut->getId(), self::FEMME,$annee, self::F));
                 }else{
-                    $homme = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($region->getId(),$statut->getId(), self::HOMME,$annee));
-                    $femme = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($region->getId(),$statut->getId(), self::FEMME,$annee));
+                    $homme = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($region->getId(),$statut->getId(), self::HOMME,$annee, self::M));
+                    $femme = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($region->getId(),$statut->getId(), self::FEMME,$annee, self::F));
                 }
             }
             $genres[$i++] = [
@@ -85,11 +87,11 @@ class GenreController extends AbstractController
             $statuts = $this->getDoctrine()->getRepository(Statut::class)->findAll();
             foreach ($statuts as $statut){
                 if ($statut->getLibelle() === self::JEUNE){
-                    $garcon = count($this->getDoctrine()->getRepository(Scout::class)->findByGenreDistrict($district->getId(),$statut->getId(), self::HOMME,$annee));
-                    $fille = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($district->getId(),$statut->getId(), self::FEMME,$annee));
+                    $garcon = count($this->getDoctrine()->getRepository(Scout::class)->findByGenreDistrict($district->getId(),$statut->getId(), self::HOMME,$annee, self::M));
+                    $fille = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($district->getId(),$statut->getId(), self::FEMME,$annee, self::F));
                 }else{
-                    $homme = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($district->getId(),$statut->getId(), self::HOMME,$annee));
-                    $femme = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($district->getId(),$statut->getId(), self::FEMME,$annee));
+                    $homme = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($district->getId(),$statut->getId(), self::HOMME,$annee, self::M));
+                    $femme = count($this->getDoctrine()->getRepository(Scout::class)->findByGenre($district->getId(),$statut->getId(), self::FEMME,$annee, self::F));
                 }
             }
             $genres[$i++] = [

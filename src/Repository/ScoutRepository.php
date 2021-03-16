@@ -230,7 +230,7 @@ class ScoutRepository extends ServiceEntityRepository
      * @param $annee
      * @return int|mixed|string
      */
-    public function findByGenre($region, $statut, $genre, $annee)
+    public function findByGenre($region, $statut, $genre, $annee, $genre2 = null)
     {
         return $this->createQueryBuilder('s')
             ->addSelect('g')
@@ -243,12 +243,13 @@ class ScoutRepository extends ServiceEntityRepository
             ->leftJoin('s.statut', 'st')
             ->where('r.id = :region')
             ->andWhere('st.id = :statut')
-            ->andWhere('s.sexe = :genre')
+            ->andWhere('s.sexe = :genre OR s.sexe = :genre2')
             ->andWhere('s.cotisation = :annee')
             ->setParameters([
                 'region' => $region,
                 'statut' => $statut,
                 'genre' => $genre,
+                'genre2' => $genre,
                 'annee' => $annee
             ])
             ->getQuery()->getResult()
@@ -262,7 +263,7 @@ class ScoutRepository extends ServiceEntityRepository
      * @param $annee
      * @return int|mixed|string
      */
-    public function findByGenreDistrict($district, $statut, $genre, $annee)
+    public function findByGenreDistrict($district, $statut, $genre, $annee, $genre2)
     {
         return $this->createQueryBuilder('s')
             ->addSelect('g')
@@ -273,12 +274,13 @@ class ScoutRepository extends ServiceEntityRepository
             ->leftJoin('s.statut', 'st')
             ->where('d.id = :district')
             ->andWhere('st.id = :statut')
-            ->andWhere('s.sexe = :genre')
+            ->andWhere('s.sexe = :genre OR s.sexe = :genre2')
             ->andWhere('s.cotisation = :annee')
             ->setParameters([
                 'district' => $district,
                 'statut' => $statut,
                 'genre' => $genre,
+                'genre2' => $genre2,
                 'annee' => $annee
             ])
             ->getQuery()->getResult()
