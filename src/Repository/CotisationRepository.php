@@ -67,6 +67,47 @@ class CotisationRepository extends ServiceEntityRepository
         return $q->getQuery()->getResult();
     }
 
+    public function findJeuneByAnnee($annee, $region = null, $district = null, $groupe=null)
+    {
+        $q = $this->createQueryBuilder('c')
+            ->addSelect('s')
+            ->addSelect('g')
+            ->addSelect('d')
+            ->addSelect('r')
+            ->leftJoin('c.scout', 's')
+            ->leftJoin('s.groupe', 'g')
+            ->leftJoin('g.district', 'd')
+            ->leftJoin('d.region', 'r')
+            ->where('c.annee = :annee')
+            ->andWhere('s.statut = 1')
+        ;
+
+        if ($region){
+            $q->andWhere('r.id = :region')
+                ->setParameters([
+                    'annee' => $annee,
+                    'region' => $region
+                ]);
+        }elseif ($district){
+            $q->andWhere('d.id = :district')
+                ->setParameters([
+                    'annee' => $annee,
+                    'district' => $district
+                ]);
+        }elseif ($groupe){
+            $q->andWhere('g.id = :groupe')
+                ->setParameters([
+                    'annee' => $annee,
+                    'groupe' => $groupe
+                ]);
+        }
+        else{
+            $q->setParameter('annee', $annee);
+        }
+
+        return $q->getQuery()->getResult();
+    }
+
 
 
     // /**
