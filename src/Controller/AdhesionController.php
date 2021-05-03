@@ -10,6 +10,7 @@ use App\Repository\GroupeRepository;
 use App\Repository\RegionRepository;
 use App\Repository\ScoutRepository;
 use App\Repository\UserInfo2020Repository;
+use App\Utilities\GestionScout;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,8 +33,9 @@ class AdhesionController extends AbstractController
     private $districtRepository;
     private $groupeRepository;
     private $userInfo2020Repository;
+    private $gestionScout;
 
-    public function __construct(ScoutRepository $scoutRepository, FonctionRepository $fonctionRepository, RegionRepository $regionRepository, DistrictRepository $districtRepository, GroupeRepository $groupeRepository, UserInfo2020Repository $userInfo2020Repository)
+    public function __construct(ScoutRepository $scoutRepository, FonctionRepository $fonctionRepository, RegionRepository $regionRepository, DistrictRepository $districtRepository, GroupeRepository $groupeRepository, UserInfo2020Repository $userInfo2020Repository, GestionScout $gestionScout)
     {
         $this->scoutRepository = $scoutRepository;
         $this->fonctionRepository = $fonctionRepository;
@@ -41,6 +43,7 @@ class AdhesionController extends AbstractController
         $this->districtRepository = $districtRepository;
         $this->groupeRepository = $groupeRepository;
         $this->userInfo2020Repository = $userInfo2020Repository;
+        $this->gestionScout = $gestionScout;
     }
 
     /**
@@ -86,13 +89,22 @@ class AdhesionController extends AbstractController
         $district = $this->districtRepository->findOneBy(['id'=>$district]);
         $groupe = $this->groupeRepository->findOneBy(['id'=>$groupe]);
         $fonction = $this->fonctionRepository->findOneBy(['id'=>$fonction]);
+        $verifScout = $this->scoutRepository->findBy([
+            'nom' => $nom,
+            'prenoms' => $prenoms,
+            'datenaiss' => $dateNaissance,
+            'lieunaiss' => $lieuNaissance,
+            'contact' => $contact,
+            'urgence' => $contactParent,
+            'cotisation' => $this->gestionScout->cotisation()
+        ]);
 
         $id_transaction = time().'-'.uniqid();
         $status_paiement = 'UNKNOW';
 
         if ($userInfo2020){
             // Verification si la transaction precedente a abouti sinon faire une mise a jour
-            if ($userInfo2020->getStatut() != '00' && $userInfo2020->getStatusPaiement()!= 'VALID'){
+            if ($userInfo2020->getStatut() != '00' && $userInfo2020->getStatusPaiement()!= 'VALID' && !$verifScout){
                 $userInfo2020->setBranche($branche);
                 $userInfo2020->setUrgence($urgence);
                 $userInfo2020->setContactParent($contactParent);

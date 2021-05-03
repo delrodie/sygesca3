@@ -6,6 +6,7 @@ namespace App\Utilities;
 
 use App\Repository\CotisationRepository;
 use App\Repository\ScoutRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 class GestionRequete
 {
@@ -25,10 +26,10 @@ class GestionRequete
      *
      * @return array
      */
-    public function liste_adherant($region=null)
+    public function liste_adherant($structure, $region=null)
     {
         $annee = $this->gestionScout->cotisation();
-        $cotisations = $this->cotisationRepository->findByAnnee($annee); //dd($cotisations);
+        $cotisations = $this->cotisationRepository->findByAnnee($annee, $structure); //dd($cotisations);
         $lists=[]; $i=0;
         foreach ($cotisations as $cotisation){
             $query = $this->scoutRepository->findRegDistGroup($cotisation->getScout()->getId(), $region); //dd($groupe);
@@ -49,9 +50,10 @@ class GestionRequete
             }
 
             $i = $i+1;
-        }
+        } //dd($lists);
 
         return $lists;
     }
+
 
 }
