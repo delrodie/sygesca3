@@ -36,10 +36,10 @@ class BackendFinanceController extends AbstractController
     {
         $req_region = $request->get('finance_region');
         if ($req_region) $structure = $req_region;
-        else $structure = 1;
+        //else $structure = 1;
 
         return $this->render('backend_finance/index.html.twig', [
-            'listes' => $this->gestionRequete->liste_adherant($structure),
+            'listes' => $this->gestionRequete->liste_adherant($structure=null),
             'annee'=> $this->gestionScout->cotisation(),
             'regions' => $this->getDoctrine()->getRepository(Region::class)->findAll(),
         ]);
@@ -52,10 +52,10 @@ class BackendFinanceController extends AbstractController
     {
         $req_region = $request->get('finance_region');
         if ($req_region) $structure = $req_region;
-        else $structure = 4;
+        //else $structure = 4;
 
         return $this->render('backend_finance/ristourne.html.twig',[
-            'listes' => $this->gestionRequete->liste_adherant($structure, true),
+            'listes' => $this->gestionRequete->liste_adherant($structure=null, true),
             'annee' => $this->gestionScout->cotisation(),
             'regions' => $this->getDoctrine()->getRepository(Region::class)->findListDiocese()
         ]);
