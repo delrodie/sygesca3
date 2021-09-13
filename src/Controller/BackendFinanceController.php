@@ -14,6 +14,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * Class BackendFinanceController
@@ -52,12 +56,28 @@ class BackendFinanceController extends AbstractController
     {
         $req_region = $request->get('finance_region');
         if ($req_region) $structure = $req_region;
-        //else $structure = 4;
+        else $structure = 4;
 
         return $this->render('backend_finance/ristourne.html.twig',[
-            'listes' => $this->gestionRequete->liste_adherant($structure=null, true),
+            'listes' => $this->gestionRequete->liste_adherant($structure, true),
             'annee' => $this->gestionScout->cotisation(),
             'regions' => $this->getDoctrine()->getRepository(Region::class)->findListDiocese()
         ]);
+    }
+
+    /**
+     * @Route("/ristourne/ajax", name="backend_finance_ristourne_ajax", methods={"GET","POST"})
+     */
+    public function ajax(Request $request)
+    {
+        //Initialisation
+        $encoders = [new XmlEncoder(), new JsonEncoder()];
+        $normalizers = [new ObjectNormalizer()];
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $listes = $this->gestionRequete->liste_adherant(); //dd($this->json($listes));
+
+        return $this->json($listes);
+
     }
 }
