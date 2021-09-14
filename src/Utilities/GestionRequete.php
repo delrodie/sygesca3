@@ -51,4 +51,30 @@ class GestionRequete
     }
 
 
+    public function liste_ristourne()
+    {
+        $annee = $this->gestionScout->cotisation();
+        $scouts = $this->scoutRepository->findAllByRistourne($annee); //dd($cotisations);
+        $lists=[]; $i=0;
+        foreach ($scouts as $scout){
+            $cotisation = $this->cotisationRepository->findOneBy(['scout'=>$scout->getId()], ['id'=>'DESC']);
+            $lists[$i++] = [
+                'region' => $scout->getGroupe()->getDistrict()->getRegion()->getNom(),
+                'district'=> $scout->getGroupe()->getDistrict()->getNom(),
+                'groupe' => $scout->getGroupe()->getParoisse(),
+                'nom' => $scout->getNom(),
+                'prenom' => $scout->getPrenoms(),
+                'dateNaissance' => $scout->getDatenaiss(),
+                'fonction' => $scout->getFonction(),
+                'matricule' => $scout->getMatricule(),
+                'montant' => $cotisation->getMontantSanFrais(),
+                'ristourne' => $cotisation->getRistourne(),
+                'carte' => $cotisation->getCarte()
+            ];
+        } //dd($lists);
+
+        return $lists;
+    }
+
+
 }

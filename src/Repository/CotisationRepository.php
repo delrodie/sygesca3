@@ -108,7 +108,33 @@ class CotisationRepository extends ServiceEntityRepository
         return $q->getQuery()->getResult();
     }
 
+    public function findDoublon($annee='2020-2021')
+    {
+        return $this->createQueryBuilder('c')
+            ->addSelect('count(s.id)')
+            ->leftJoin('c.scout', 's')
+            ->where('c.annee = :annee')
+            ->groupBy('s.id')
+            ->setParameter('annee', $annee)
+            ->getQuery()->getResult()
+            ;
 
+
+    }
+    function test()
+    {
+        $sql = "
+                SELECT COUNT(c.scout) as nb, s
+                FROM App\Entity\Cotisation c 
+                JOIN App\Entity\Scout s
+                WHERE c.scout = s.id
+                AND c.annee = '2020-2021'
+                GROUP BY c.scout
+                HAVING COUNT(c.scout) > 1
+        ";
+        $query = $this->getEntityManager()->createQuery($sql);
+        return $query->execute();
+    }
 
     // /**
     //  * @return Cotisation[] Returns an array of Cotisation objects

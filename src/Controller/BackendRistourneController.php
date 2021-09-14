@@ -40,8 +40,16 @@ class BackendRistourneController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers, $encoders);
 
-        $listes = $this->gestionRequete->liste_adherant(); //dd($this->json($listes));
+        $listes = $this->gestionRequete->liste_ristourne(); //dd($this->json($listes));
 
         return $data = $this->json($listes);
+    }
+    
+    /**
+     * @Route("/doublon/1", name="backend_ristourne_doublon")
+     */
+    public function doublon()
+    {
+        
     }
 }

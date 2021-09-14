@@ -304,6 +304,25 @@ class ScoutRepository extends ServiceEntityRepository
             ;
     }
 
+    /**
+     * @param $annee
+     * @return int|mixed|string
+     */
+    public function findAllByRistourne($annee)
+    {
+        return $this->createQueryBuilder('s')
+            ->addSelect('g')
+            ->addSelect('d')
+            ->addSelect('r')
+            ->leftJoin('s.groupe', 'g')
+            ->leftJoin('g.district', 'd')
+            ->leftJoin('d.region', 'r')
+            ->where('s.cotisation = :annee')
+            ->setParameter('annee', $annee)
+            ->getQuery()->getResult()
+            ;
+    }
+
     // /**
     //  * @return Scout[] Returns an array of Scout objects
     //  */

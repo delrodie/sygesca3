@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Cotisation;
 use App\Entity\Region;
 use App\Repository\CotisationRepository;
 use App\Repository\ObjectifRepository;
@@ -83,6 +84,8 @@ class BackendController extends AbstractController
         $sexe['total'] = count($this->scoutRepository->findBy(['cotisation'=>$annee]));
         $sexe['homme'] =  count($this->scoutRepository->findBySexe('HOMME',$annee));
         $sexe['femme'] = count($this->scoutRepository->findBySexe('FEMME',$annee));
+
+        //$test = count($this->getDoctrine()->getRepository(Cotisation::class)->findBy(['annee'=>$annee])); dd($test);
 
 
         return $this->render('backend/index.html.twig',[
