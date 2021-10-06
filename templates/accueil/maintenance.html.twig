@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ASCCI:: ADHESION 2020-2021{% endblock %}</title>
+    <link rel="icon" href="{{ absolute_url(asset('assets/images/ascci.png') )}}">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ absolute_url(asset('assets/vendor/bootstrap/css/bootstrap.min.css')) }}">
+        <link rel="stylesheet" href="{{ absolute_url(asset('assets/css/button.css')) }}">
+    {% endblock %}
+</head>
+<body style="background-image: url({{ absolute_url(asset('assets/images/bg-registration-form-2.jpg')) }}); background-size: cover;">
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col logo">
+                <img src="{{ absolute_url(asset('assets/images/ascci.png')) }}" alt="logo ASCCI">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col adhesion">
+                <h2>ADHESION A L'ASCCI POUR L'ANNEE 2021-2022</h2>
+            </div>
+        </div>
+        <div class="bouton">
+            <a href="{{ absolute_url(path('app_accueil')) }}" class="btn btn-xlarge rouge">OUPS!!!<br><span class="small">Site en maintenance</span></a>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ absolute_url(asset('assets/js/jquery.min.js')) }}"></script>
+    <script src="{{ absolute_url(asset('assets/vendor/bootstrap/css/bootstrap.min.css')) }}"></script>
+{% endblock %}
+</body>
+</html>

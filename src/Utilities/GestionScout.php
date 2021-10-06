@@ -50,7 +50,7 @@ class GestionScout
     public function cotisation()
     {
         $mois_encours = Date('m', time());
-        if ($mois_encours > 9){
+        if ($mois_encours > 10){
             $debut_annee = Date('Y', time());
             $fin_annee = Date('Y', time())+1;
             //$an = Date('y', time())+1;
